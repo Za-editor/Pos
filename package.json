@@ -9,9 +9,17 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@iconify/react": "^6.0.2",
+    "@lineiconshq/free-icons": "^1.0.4",
+    "@lineiconshq/react-lineicons": "^1.0.5",
+    "@radix-ui/react-checkbox": "^1.3.3",
+    "@radix-ui/react-label": "^2.1.8",
     "@radix-ui/react-slot": "^1.2.4",
+    "@supabase/ssr": "^0.8.0",
+    "@supabase/supabase-js": "^2.91.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "lineicons": "^1.3.2",
     "lucide-react": "^0.562.0",
     "next": "16.1.4",
     "react": "19.2.3",
