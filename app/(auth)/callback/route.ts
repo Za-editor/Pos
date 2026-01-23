@@ -10,16 +10,11 @@ export async function GET(request: Request) {
     code: code ? "present" : "missing",
   });
 
- 
-  // STEP 1: CHECK IF CODE IS PRESENT
-
 
   if (code) {
     const supabase = await createClient();
 
     try {
-    
-      // STEP 2: EXCHANGE CODE FOR SESSION
     
 
       const { data, error } = await supabase.auth.exchangeCodeForSession(code);
@@ -35,10 +30,6 @@ export async function GET(request: Request) {
 
       console.log("Session created successfully for user:", data.user?.email);
 
-    
-      // STEP 3: SUCCESSFUL - REDIRECT TO DASHBOARD
-    
-
       return NextResponse.redirect(`${origin}/dashboard`);
     } catch (err) {
       console.error("Unexpected error in auth callback:", err);
@@ -48,10 +39,6 @@ export async function GET(request: Request) {
       );
     }
   }
-
- 
-  // NO CODE PROVIDED - REDIRECT TO LOGIN
-
 
   console.log("No code provided in callback");
   return NextResponse.redirect(`${origin}/login`);

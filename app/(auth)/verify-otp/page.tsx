@@ -126,7 +126,7 @@ export default function VerifyOtpPage() {
 
     try {
      
-      // STEP 1: VERIFY THE OTP CODE
+      // VERIFY THE OTP CODE
       
 
       const { data, error } = await verifyEmailOtp(email, otpCode);
@@ -143,18 +143,18 @@ export default function VerifyOtpPage() {
       }
 
       
-      // STEP 2: OTP VERIFIED SUCCESSFULLY
+      // OTP VERIFIED SUCCESSFULLY
      
 
       if (data?.user) {
         toast.success("Email Verified!", {
           description:
             "Your email has been verified successfully. Please sign in to continue.",
-          duration: 4000,
+          duration: 2000,
         });
 
         
-        // STEP 3: REDIRECT TO LOGIN PAGE
+        // REDIRECT TO LOGIN PAGE
       
 
         setTimeout(() => {

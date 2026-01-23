@@ -62,7 +62,7 @@ export default function RegisterPage() {
 
     try {
 
-      // STEP 1: CREATE ACCOUNT
+      //  CREATE ACCOUNT
 
 
       const { data, error } = await signUpWithOtp(email, password, name);
@@ -74,9 +74,7 @@ export default function RegisterPage() {
         return;
       }
 
-
-      // STEP 2: CHECK IF EMAIL CONFIRMATION IS REQUIRED
-
+      //CHECK IF EMAIL CONFIRMATION IS REQUIRED
 
       if (data && data.user) {
    
@@ -90,15 +88,13 @@ export default function RegisterPage() {
             duration: 4000,
           });
 
-
-          // STEP 3: REDIRECT TO OTP VERIFICATION
+          // REDIRECT TO OTP VERIFICATION
  
-
           setTimeout(() => {
             router.push(
               `/verify-otp?email=${encodeURIComponent(email)}&type=signup`,
             );
-          }, 1500);
+          }, 1000);
         } else {
    
           toast.success("Account Created!", {
