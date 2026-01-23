@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
@@ -12,7 +12,7 @@ import { Lineicons } from "@lineiconshq/react-lineicons";
 import { FacebookOutlined, AppleBrandOutlined } from "@lineiconshq/free-icons";
 import { signIn, signInWithOAuth } from "@/lib/supabase/auth";
 import { toast } from "sonner";
-
+import { useSearchParams } from "next/navigation";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -21,6 +21,16 @@ export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    const error = searchParams.get("error");
+    if (error) {
+      toast.error("Authentication Error", {
+        description: decodeURIComponent(error),
+      });
+    }
+  }, [searchParams]);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();

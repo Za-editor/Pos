@@ -12,6 +12,8 @@ export async function middleware(request: NextRequest) {
   ) {
     return NextResponse.redirect(new URL("/maintenance", request.url));
   }
+
+  
   // Check for coming soon (skip for maintenance page itself)
   if (
     COMING_SOON &&

@@ -6,7 +6,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Timer, Loader2 } from "lucide-react";
-import { verifyOtp, resendOtp } from "@/lib/supabase/auth";
+import { verifyEmailOtp, resendOtp } from "@/lib/supabase/auth";
 import { toast } from "sonner";
 
 export default function VerifyOtpPage() {
@@ -19,9 +19,25 @@ export default function VerifyOtpPage() {
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
   const email = searchParams.get("email") || "";
-  const type = (searchParams.get("type") as "signup" | "email") || "signup";
+  const type = searchParams.get("type") || "signup";
 
-  // Countdown timer
+
+  // REDIRECT IF NO EMAIL PROVIDED
+ 
+
+  useEffect(() => {
+    if (!email) {
+      toast.error("Error", {
+        description: "No email provided. Please register again.",
+      });
+      router.push("/register");
+    }
+  }, [email, router]);
+
+
+  // COUNTDOWN TIMER
+ 
+
   useEffect(() => {
     if (timeLeft <= 0) return;
 
@@ -32,21 +48,26 @@ export default function VerifyOtpPage() {
     return () => clearInterval(timer);
   }, [timeLeft]);
 
-  // Format time as MM:SS
+
   const formatTime = (seconds: number) => {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
     return `${mins.toString().padStart(2, "0")}:${secs.toString().padStart(2, "0")}`;
   };
 
-  // Mask email for display
+
   const maskEmail = (email: string) => {
+    if (!email) return "";
     const [username, domain] = email.split("@");
+    if (!username || !domain) return email;
     const maskedUsername = username.slice(0, 2) + "****" + username.slice(-2);
     return `${maskedUsername}@${domain}`;
   };
 
-  // Handle OTP input
+ 
+  // OTP INPUT HANDLING
+
+
   const handleChange = (value: string, index: number) => {
     if (isNaN(Number(value)) && value !== "") return;
 
@@ -60,7 +81,6 @@ export default function VerifyOtpPage() {
     }
   };
 
-  // Handle backspace
   const handleKeyDown = (
     e: React.KeyboardEvent<HTMLInputElement>,
     index: number,
@@ -70,7 +90,6 @@ export default function VerifyOtpPage() {
     }
   };
 
-  // Handle paste
   const handlePaste = (e: React.ClipboardEvent) => {
     e.preventDefault();
     const pastedData = e.clipboardData.getData("text").slice(0, 6);
@@ -83,12 +102,14 @@ export default function VerifyOtpPage() {
     });
     setOtp(newOtp);
 
-    // Focus last filled input or next empty
     const nextIndex = Math.min(pastedData.length, 5);
     inputRefs.current[nextIndex]?.focus();
   };
 
-  // Handle verify
+  
+  // VERIFY OTP
+  
+
   const handleVerify = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -104,46 +125,72 @@ export default function VerifyOtpPage() {
     setLoading(true);
 
     try {
-      const { data, error } = await verifyOtp(email, otpCode, type);
+     
+      // STEP 1: VERIFY THE OTP CODE
+      
+
+      const { data, error } = await verifyEmailOtp(email, otpCode);
 
       if (error) {
         toast.error("Verification Failed", {
           description: error.message,
         });
+
+       
+        setOtp(["", "", "", "", "", ""]);
+        inputRefs.current[0]?.focus();
         return;
       }
 
-      if (data.user) {
+      
+      // STEP 2: OTP VERIFIED SUCCESSFULLY
+     
+
+      if (data?.user) {
         toast.success("Email Verified!", {
-          description: "Your account has been verified successfully.",
+          description:
+            "Your email has been verified successfully. Please sign in to continue.",
+          duration: 4000,
         });
 
+        
+        // STEP 3: REDIRECT TO LOGIN PAGE
+      
+
         setTimeout(() => {
-          if (type === "signup") {
-            router.push("/dashboard");
-          } else {
-            router.push("/login");
-          }
-          router.refresh();
-        }, 1000);
+          router.push("/login");
+        }, 1500);
       }
     } catch (err) {
-      console.log(err);
-      
+      console.error("OTP verification error:", err);
       toast.error("Error", {
         description: "An unexpected error occurred. Please try again.",
       });
+
+  
+      setOtp(["", "", "", "", "", ""]);
+      inputRefs.current[0]?.focus();
     } finally {
       setLoading(false);
     }
   };
 
-  // Handle resend OTP
+
+  // RESEND OTP
+
+
   const handleResend = async () => {
+    if (timeLeft > 0) {
+      toast.error("Please Wait", {
+        description: `You can resend OTP in ${formatTime(timeLeft)}`,
+      });
+      return;
+    }
+
     setResending(true);
 
     try {
-      const { error } = await resendOtp(email);
+      const { error } = await resendOtp(email, "signup");
 
       if (error) {
         toast.error("Resend Failed", {
@@ -156,9 +203,8 @@ export default function VerifyOtpPage() {
         description: "A new verification code has been sent to your email.",
       });
 
-      // Reset timer
+  
       setTimeLeft(600);
-      // Clear OTP inputs
       setOtp(["", "", "", "", "", ""]);
       inputRefs.current[0]?.focus();
     } catch (err) {
@@ -200,7 +246,7 @@ export default function VerifyOtpPage() {
               {otp.map((digit, index) => (
                 <Input
                   key={index}
-                  ref={(el) => (inputRefs.current[index] = el)}
+                  ref={(el) => { inputRefs.current[index] = el; }}
                   type="text"
                   inputMode="numeric"
                   maxLength={1}
@@ -210,6 +256,7 @@ export default function VerifyOtpPage() {
                   onPaste={index === 0 ? handlePaste : undefined}
                   className="h-14 w-14 text-center text-xl font-bold border-gray-200 focus:ring-[#FE9F43] focus:border-[#FE9F43]"
                   disabled={loading}
+                  autoFocus={index === 0}
                 />
               ))}
             </div>

@@ -10,7 +10,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Mail, EyeOff, Eye, User2, Loader2 } from "lucide-react";
 import { Lineicons } from "@lineiconshq/react-lineicons";
 import { FacebookOutlined, AppleBrandOutlined } from "@lineiconshq/free-icons";
-import { signUp, signInWithOAuth } from "@/lib/supabase/auth";
+import { signUpWithOtp, signInWithOAuth } from "@/lib/supabase/auth";
 import { toast } from "sonner";
 
 export default function RegisterPage() {
@@ -27,7 +27,9 @@ export default function RegisterPage() {
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Validation
+
+    // VALIDATION
+
     if (!name.trim()) {
       toast.error("Validation Error", {
         description: "Please enter your name",
@@ -59,7 +61,11 @@ export default function RegisterPage() {
     setLoading(true);
 
     try {
-      const { data, error } = await signUp(email, password, name);
+
+      // STEP 1: CREATE ACCOUNT
+
+
+      const { data, error } = await signUpWithOtp(email, password, name);
 
       if (error) {
         toast.error("Registration Failed", {
@@ -68,32 +74,44 @@ export default function RegisterPage() {
         return;
       }
 
-      // Check if email confirmation is required
-      if (data.user && !data.session) {
-        toast.success("Registration Successful!", {
-          description: "Please check your email for the verification code.",
-        });
 
-        // Redirect to OTP verification page with email
-        setTimeout(() => {
-          router.push(
-            `/verify-otp?email=${encodeURIComponent(email)}&type=signup`,
-          );
-        }, 1500);
-      } else if (data.session) {
-        // Auto-login if email confirmation is disabled
-        toast.success("Account Created!", {
-          description: "Welcome to DreamsPOS. Redirecting...",
-        });
+      // STEP 2: CHECK IF EMAIL CONFIRMATION IS REQUIRED
 
-        setTimeout(() => {
-          router.push("/dashboard");
-          router.refresh();
-        }, 1000);
+
+      if (data && data.user) {
+   
+        const emailConfirmed = data.user.email_confirmed_at;
+
+        if (!emailConfirmed) {
+          // Email confirmation required - OTP has been sent
+          toast.success("Registration Successful!", {
+            description:
+              "Please check your email for a 6-digit verification code.",
+            duration: 4000,
+          });
+
+
+          // STEP 3: REDIRECT TO OTP VERIFICATION
+ 
+
+          setTimeout(() => {
+            router.push(
+              `/verify-otp?email=${encodeURIComponent(email)}&type=signup`,
+            );
+          }, 1500);
+        } else {
+   
+          toast.success("Account Created!", {
+            description: "Please sign in to continue.",
+          });
+
+          setTimeout(() => {
+            router.push("/login");
+          }, 1500);
+        }
       }
     } catch (err) {
-      console.log(err);
-      
+      console.error("Registration error:", err);
       toast.error("Error", {
         description: "An unexpected error occurred. Please try again.",
       });
@@ -113,7 +131,10 @@ export default function RegisterPage() {
           description: error.message,
         });
       }
+      // If successful, user will be redirected to OAuth provider
+   
     } catch (err) {
+
       console.log(err);
       
       toast.error("Error", {
