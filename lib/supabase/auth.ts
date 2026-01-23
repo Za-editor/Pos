@@ -6,7 +6,7 @@ import { createClient as createServerClient } from "./server";
 export async function signUp(email: string, password: string, name: string) {
   const supabase = createClient()
   
-  // First, create the user account
+
   const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
     email,
     password,
@@ -21,12 +21,12 @@ export async function signUp(email: string, password: string, name: string) {
     return { data: null, error: signUpError }
   }
 
-  // Then immediately send OTP for verification
+  
   if (signUpData.user && !signUpData.session) {
     const { error: otpError } = await supabase.auth.signInWithOtp({
       email,
       options: {
-        shouldCreateUser: false, // Don't create new user, just send OTP
+        shouldCreateUser: false, 
       },
     })
 
