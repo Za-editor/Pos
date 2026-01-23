@@ -1,19 +1,86 @@
 "use client";
 
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Mail, EyeOff } from "lucide-react";
+import { Mail, EyeOff, Eye, Loader2 } from "lucide-react";
 import { Lineicons } from "@lineiconshq/react-lineicons";
 import { FacebookOutlined, AppleBrandOutlined } from "@lineiconshq/free-icons";
+import { signIn, signInWithOAuth } from "@/lib/supabase/auth";
+import { toast } from "sonner";
+
 
 export default function LoginPage() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [rememberMe, setRememberMe] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
+
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+
+    try {
+      const { data, error } = await signIn(email, password);
+
+      if (error) {
+        toast.error("Login Failed", {
+          description: error.message,
+        });
+        return;
+      }
+
+      if (data.user) {
+        toast.success("Welcome back!", {
+          description: "Login successful. Redirecting...",
+        });
+
+      
+        setTimeout(() => {
+          router.push("/dashboard");
+          router.refresh();
+        }, 1000);
+      }
+    } catch (err) {
+      console.log(err);
+      
+      toast.error("Error", {
+        description: "An unexpected error occurred. Please try again.",
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleSocialLogin = async (
+    provider: "google" | "facebook" | "apple",
+  ) => {
+    try {
+      const { error } = await signInWithOAuth(provider);
+
+      if (error) {
+        toast.error("Authentication Failed", {
+          description: error.message,
+        });
+      }
+    } catch (err) {
+      console.log(err);
+      toast.error("Error", {
+        description: "Failed to initiate social login.",
+      });
+    }
+  };
+
   return (
     <div className="flex min-h-screen font-sans text-[#4B4B4B] bg-white">
       <div className="flex flex-col w-full lg:w-1/2 p-6 md:p-12 justify-between">
-        <div className="flex justify-center  w-full">
+        <div className="flex justify-center w-full">
           <div className="relative w-40 h-16">
             <Image
               src="/images/logo/logo.png"
@@ -31,7 +98,7 @@ export default function LoginPage() {
             Access the Dreamspos panel using your email and passcode.
           </p>
 
-          <form className="space-y-5">
+          <form onSubmit={handleLogin} className="space-y-5">
             <div className="space-y-1">
               <label className="text-sm font-semibold text-gray-700">
                 Email <span className="text-red-500">*</span>
@@ -41,7 +108,10 @@ export default function LoginPage() {
                   type="email"
                   placeholder="Enter your email"
                   className="h-12 pr-10 border-gray-200 focus-visible:ring-[#FE9F43]"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   required
+                  disabled={loading}
                 />
                 <Mail className="absolute right-3 top-3.5 h-5 w-5 text-gray-400" />
               </div>
@@ -53,12 +123,25 @@ export default function LoginPage() {
               </label>
               <div className="relative">
                 <Input
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   placeholder="Enter your password"
                   className="h-12 pr-10 border-gray-200 focus-visible:ring-[#FE9F43]"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   required
+                  disabled={loading}
                 />
-                <EyeOff className="absolute right-3 top-3.5 h-5 w-5 text-gray-400" />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-3.5"
+                >
+                  {showPassword ? (
+                    <Eye className="h-5 w-5 text-gray-400" />
+                  ) : (
+                    <EyeOff className="h-5 w-5 text-gray-400" />
+                  )}
+                </button>
               </div>
             </div>
 
@@ -66,6 +149,10 @@ export default function LoginPage() {
               <div className="flex items-center space-x-2">
                 <Checkbox
                   id="remember"
+                  checked={rememberMe}
+                  onCheckedChange={(checked) =>
+                    setRememberMe(checked as boolean)
+                  }
                   className="border-gray-300 data-[state=checked]:bg-[#FE9F43] data-[state=checked]:border-[#FE9F43]"
                 />
                 <label
@@ -86,8 +173,16 @@ export default function LoginPage() {
             <Button
               type="submit"
               className="w-full bg-[#FE9F43] hover:bg-[#f09a42] text-white font-bold h-12 text-md"
+              disabled={loading}
             >
-              Sign In
+              {loading ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Signing In...
+                </>
+              ) : (
+                "Sign In"
+              )}
             </Button>
           </form>
 
@@ -114,14 +209,20 @@ export default function LoginPage() {
 
           <div className="grid grid-cols-3 gap-3">
             <Button
+              type="button"
               variant="outline"
               className="bg-[#2D65E1] hover:bg-[#2554c7] border-none h-12"
+              onClick={() => handleSocialLogin("facebook")}
+              disabled={loading}
             >
               <Lineicons icon={FacebookOutlined} size={20} color="white" />
             </Button>
             <Button
+              type="button"
               variant="outline"
               className="bg-white border border-gray-100 shadow-sm h-12"
+              onClick={() => handleSocialLogin("google")}
+              disabled={loading}
             >
               <svg className="h-5 w-5" viewBox="0 0 24 24">
                 <path
@@ -143,8 +244,11 @@ export default function LoginPage() {
               </svg>
             </Button>
             <Button
+              type="button"
               variant="outline"
               className="bg-[#1A2138] hover:bg-black border-none h-12"
+              onClick={() => handleSocialLogin("apple")}
+              disabled={loading}
             >
               <Lineicons icon={AppleBrandOutlined} size={20} color="white" />
             </Button>

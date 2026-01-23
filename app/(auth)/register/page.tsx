@@ -1,19 +1,131 @@
 "use client";
 
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Mail, EyeOff, User2 } from "lucide-react";
+import { Mail, EyeOff, Eye, User2, Loader2 } from "lucide-react";
 import { Lineicons } from "@lineiconshq/react-lineicons";
 import { FacebookOutlined, AppleBrandOutlined } from "@lineiconshq/free-icons";
+import { signUp, signInWithOAuth } from "@/lib/supabase/auth";
+import { toast } from "sonner";
 
 export default function RegisterPage() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [agreeToTerms, setAgreeToTerms] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
+
+  const handleRegister = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    // Validation
+    if (!name.trim()) {
+      toast.error("Validation Error", {
+        description: "Please enter your name",
+      });
+      return;
+    }
+
+    if (password.length < 6) {
+      toast.error("Validation Error", {
+        description: "Password must be at least 6 characters long",
+      });
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      toast.error("Validation Error", {
+        description: "Passwords do not match",
+      });
+      return;
+    }
+
+    if (!agreeToTerms) {
+      toast.error("Validation Error", {
+        description: "Please agree to the Terms & Privacy",
+      });
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      const { data, error } = await signUp(email, password, name);
+
+      if (error) {
+        toast.error("Registration Failed", {
+          description: error.message,
+        });
+        return;
+      }
+
+      // Check if email confirmation is required
+      if (data.user && !data.session) {
+        toast.success("Registration Successful!", {
+          description: "Please check your email for the verification code.",
+        });
+
+        // Redirect to OTP verification page with email
+        setTimeout(() => {
+          router.push(
+            `/verify-otp?email=${encodeURIComponent(email)}&type=signup`,
+          );
+        }, 1500);
+      } else if (data.session) {
+        // Auto-login if email confirmation is disabled
+        toast.success("Account Created!", {
+          description: "Welcome to DreamsPOS. Redirecting...",
+        });
+
+        setTimeout(() => {
+          router.push("/dashboard");
+          router.refresh();
+        }, 1000);
+      }
+    } catch (err) {
+      console.log(err);
+      
+      toast.error("Error", {
+        description: "An unexpected error occurred. Please try again.",
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleSocialSignup = async (
+    provider: "google" | "facebook" | "apple",
+  ) => {
+    try {
+      const { error } = await signInWithOAuth(provider);
+
+      if (error) {
+        toast.error("Authentication Failed", {
+          description: error.message,
+        });
+      }
+    } catch (err) {
+      console.log(err);
+      
+      toast.error("Error", {
+        description: "Failed to initiate social sign up.",
+      });
+    }
+  };
+
   return (
     <div className="flex min-h-screen font-sans text-[#4B4B4B] bg-white">
       <div className="flex flex-col w-full lg:w-1/2 p-6 md:p-12 justify-between">
-        <div className="flex justify-center  w-full">
+        <div className="flex justify-center w-full">
           <div className="relative w-40 h-16">
             <Image
               src="/images/logo/logo.png"
@@ -31,7 +143,7 @@ export default function RegisterPage() {
             Create an account to start managing your POS.
           </p>
 
-          <form className="space-y-4">
+          <form onSubmit={handleRegister} className="space-y-4">
             <div className="space-y-1">
               <label className="text-sm font-semibold">
                 Name <span className="text-red-500">*</span>
@@ -39,8 +151,12 @@ export default function RegisterPage() {
               <div className="relative">
                 <Input
                   type="text"
+                  placeholder="Enter your full name"
                   className="h-11 pr-10 border-gray-200 focus-visible:ring-[#FE9F43]"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
                   required
+                  disabled={loading}
                 />
                 <User2 className="absolute right-3 top-3 h-4 w-4 text-gray-400" />
               </div>
@@ -53,8 +169,12 @@ export default function RegisterPage() {
               <div className="relative">
                 <Input
                   type="email"
+                  placeholder="Enter your email"
                   className="h-11 pr-10 border-gray-200 focus-visible:ring-[#FE9F43]"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   required
+                  disabled={loading}
                 />
                 <Mail className="absolute right-3 top-3 h-4 w-4 text-gray-400" />
               </div>
@@ -66,11 +186,25 @@ export default function RegisterPage() {
               </label>
               <div className="relative">
                 <Input
-                  type="password"
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Enter your password"
                   className="h-11 pr-10 border-gray-200 focus-visible:ring-[#FE9F43]"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   required
+                  disabled={loading}
                 />
-                <EyeOff className="absolute right-3 top-3 h-4 w-4 text-gray-400" />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-3"
+                >
+                  {showPassword ? (
+                    <Eye className="h-4 w-4 text-gray-400" />
+                  ) : (
+                    <EyeOff className="h-4 w-4 text-gray-400" />
+                  )}
+                </button>
               </div>
             </div>
 
@@ -80,21 +214,39 @@ export default function RegisterPage() {
               </label>
               <div className="relative">
                 <Input
-                  type="password"
+                  type={showConfirmPassword ? "text" : "password"}
+                  placeholder="Confirm your password"
                   className="h-11 pr-10 border-gray-200 focus-visible:ring-[#FE9F43]"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
                   required
+                  disabled={loading}
                 />
-                <EyeOff className="absolute right-3 top-3 h-4 w-4 text-gray-400" />
+                <button
+                  type="button"
+                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                  className="absolute right-3 top-3"
+                >
+                  {showConfirmPassword ? (
+                    <Eye className="h-4 w-4 text-gray-400" />
+                  ) : (
+                    <EyeOff className="h-4 w-4 text-gray-400" />
+                  )}
+                </button>
               </div>
             </div>
 
             <div className="flex items-center space-x-2 py-2">
               <Checkbox
                 id="terms"
+                checked={agreeToTerms}
+                onCheckedChange={(checked) =>
+                  setAgreeToTerms(checked as boolean)
+                }
                 className="border-gray-300 data-[state=checked]:bg-[#FE9F43] data-[state=checked]:border-[#FE9F43]"
               />
               <label htmlFor="terms" className="text-sm text-gray-600">
-                I agree to the
+                I agree to the{" "}
                 <span className="text-red-400 cursor-pointer hover:underline">
                   Terms & Privacy
                 </span>
@@ -104,8 +256,16 @@ export default function RegisterPage() {
             <Button
               type="submit"
               className="w-full bg-[#FE9F43] hover:bg-[#f09a42] text-white font-bold h-11"
+              disabled={loading}
             >
-              Sign Up
+              {loading ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Creating Account...
+                </>
+              ) : (
+                "Sign Up"
+              )}
             </Button>
           </form>
 
@@ -132,14 +292,20 @@ export default function RegisterPage() {
 
           <div className="grid grid-cols-3 gap-3">
             <Button
+              type="button"
               variant="outline"
               className="bg-[#2D65E1] hover:bg-[#2554c7] border-none h-11"
+              onClick={() => handleSocialSignup("facebook")}
+              disabled={loading}
             >
               <Lineicons icon={FacebookOutlined} size={20} color="white" />
             </Button>
             <Button
+              type="button"
               variant="outline"
               className="bg-white border border-gray-100 shadow-sm h-11"
+              onClick={() => handleSocialSignup("google")}
+              disabled={loading}
             >
               <svg className="h-5 w-5" viewBox="0 0 24 24">
                 <path
@@ -161,8 +327,11 @@ export default function RegisterPage() {
               </svg>
             </Button>
             <Button
+              type="button"
               variant="outline"
               className="bg-[#1A2138] hover:bg-black border-none h-11"
+              onClick={() => handleSocialSignup("apple")}
+              disabled={loading}
             >
               <Lineicons icon={AppleBrandOutlined} size={20} color="white" />
             </Button>
