@@ -1,7 +1,27 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
+const MAINTENANCE_MODE = false;
+const COMING_SOON = false;
+
 export async function middleware(request: NextRequest) {
+  // Check for maintenance mode (skip for maintenance page itself)
+  if (
+    MAINTENANCE_MODE &&
+    !request.nextUrl.pathname.startsWith("/maintenance")
+  ) {
+    return NextResponse.redirect(new URL("/maintenance", request.url));
+  }
+  // Check for coming soon (skip for maintenance page itself)
+  if (
+    COMING_SOON &&
+    !request.nextUrl.pathname.startsWith("/coming-soon")
+  ) {
+    return NextResponse.redirect(new URL("/coming-soon", request.url));
+  }
+
+
+
   let supabaseResponse = NextResponse.next({
     request,
   });

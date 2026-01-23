@@ -1,7 +1,7 @@
 import { createClient } from "./client";
 import { createClient as createServerClient } from "./server";
 
-// Email and password Signup
+
 // Sign up with email and password (OTP-based)
 export async function signUp(email: string, password: string, name: string) {
   const supabase = createClient()
