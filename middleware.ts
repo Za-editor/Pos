@@ -2,10 +2,9 @@ import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
 const MAINTENANCE_MODE = false;
-const COMING_SOON = false;
 
 export async function middleware(request: NextRequest) {
-  // Check for maintenance mode (skip for maintenance page itself)
+
   if (
     MAINTENANCE_MODE &&
     !request.nextUrl.pathname.startsWith("/maintenance")
@@ -13,16 +12,11 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL("/maintenance", request.url));
   }
 
-  
-  // Check for coming soon (skip for maintenance page itself)
-  if (
-    COMING_SOON &&
-    !request.nextUrl.pathname.startsWith("/coming-soon")
-  ) {
-    return NextResponse.redirect(new URL("/coming-soon", request.url));
+  // SKIP AUTH CHECK FOR CALLBACK ROUTE
+
+  if (request.nextUrl.pathname === "/auth/callback") {
+    return NextResponse.next();
   }
-
-
 
   let supabaseResponse = NextResponse.next({
     request,
@@ -37,32 +31,38 @@ export async function middleware(request: NextRequest) {
           return request.cookies.getAll();
         },
         setAll(cookiesToSet) {
-          cookiesToSet.forEach(({ name, value }) =>
-            request.cookies.set(name, value),
-          );
+          cookiesToSet.forEach(({ name, value }) => {
+            request.cookies.set(name, value);
+          });
           supabaseResponse = NextResponse.next({
             request,
           });
-          cookiesToSet.forEach(({ name, value, options }) =>
-            supabaseResponse.cookies.set(name, value, options),
-          );
+          cookiesToSet.forEach(({ name, value, options }) => {
+            supabaseResponse.cookies.set(name, value, options);
+          });
         },
       },
     },
   );
 
+
+  // REFRESH SESSION
+
+  await supabase.auth.getUser();
+
   const {
-    data: { user },
-  } = await supabase.auth.getUser();
+    data: { session },
+  } = await supabase.auth.getSession();
+
 
   // Redirect to login if not authenticated and trying to access dashboard
-  if (!user && request.nextUrl.pathname.startsWith("/dashboard")) {
+  if (!session && request.nextUrl.pathname.startsWith("/dashboard")) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
 
   // Redirect to dashboard if authenticated and trying to access auth pages
   if (
-    user &&
+    session &&
     (request.nextUrl.pathname === "/login" ||
       request.nextUrl.pathname === "/register")
   ) {

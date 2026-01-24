@@ -19,11 +19,8 @@ export default function VerifyOtpPage() {
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
   const email = searchParams.get("email") || "";
-  const type = searchParams.get("type") || "signup";
-
 
   // REDIRECT IF NO EMAIL PROVIDED
- 
 
   useEffect(() => {
     if (!email) {
@@ -34,9 +31,7 @@ export default function VerifyOtpPage() {
     }
   }, [email, router]);
 
-
   // COUNTDOWN TIMER
- 
 
   useEffect(() => {
     if (timeLeft <= 0) return;
@@ -48,13 +43,11 @@ export default function VerifyOtpPage() {
     return () => clearInterval(timer);
   }, [timeLeft]);
 
-
   const formatTime = (seconds: number) => {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
     return `${mins.toString().padStart(2, "0")}:${secs.toString().padStart(2, "0")}`;
   };
-
 
   const maskEmail = (email: string) => {
     if (!email) return "";
@@ -64,9 +57,7 @@ export default function VerifyOtpPage() {
     return `${maskedUsername}@${domain}`;
   };
 
- 
   // OTP INPUT HANDLING
-
 
   const handleChange = (value: string, index: number) => {
     if (isNaN(Number(value)) && value !== "") return;
@@ -106,9 +97,7 @@ export default function VerifyOtpPage() {
     inputRefs.current[nextIndex]?.focus();
   };
 
-  
   // VERIFY OTP
-  
 
   const handleVerify = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -125,9 +114,7 @@ export default function VerifyOtpPage() {
     setLoading(true);
 
     try {
-     
       // VERIFY THE OTP CODE
-      
 
       const { data, error } = await verifyEmailOtp(email, otpCode);
 
@@ -136,15 +123,12 @@ export default function VerifyOtpPage() {
           description: error.message,
         });
 
-       
         setOtp(["", "", "", "", "", ""]);
         inputRefs.current[0]?.focus();
         return;
       }
 
-      
       // OTP VERIFIED SUCCESSFULLY
-     
 
       if (data?.user) {
         toast.success("Email Verified!", {
@@ -153,9 +137,7 @@ export default function VerifyOtpPage() {
           duration: 2000,
         });
 
-        
         // REDIRECT TO LOGIN PAGE
-      
 
         setTimeout(() => {
           router.push("/login");
@@ -167,7 +149,6 @@ export default function VerifyOtpPage() {
         description: "An unexpected error occurred. Please try again.",
       });
 
-  
       setOtp(["", "", "", "", "", ""]);
       inputRefs.current[0]?.focus();
     } finally {
@@ -175,9 +156,7 @@ export default function VerifyOtpPage() {
     }
   };
 
-
   // RESEND OTP
-
 
   const handleResend = async () => {
     if (timeLeft > 0) {
@@ -203,13 +182,12 @@ export default function VerifyOtpPage() {
         description: "A new verification code has been sent to your email.",
       });
 
-  
       setTimeLeft(600);
       setOtp(["", "", "", "", "", ""]);
       inputRefs.current[0]?.focus();
     } catch (err) {
       console.log(err);
-      
+
       toast.error("Error", {
         description: "Failed to resend OTP. Please try again.",
       });
@@ -246,7 +224,9 @@ export default function VerifyOtpPage() {
               {otp.map((digit, index) => (
                 <Input
                   key={index}
-                  ref={(el) => { inputRefs.current[index] = el; }}
+                  ref={(el) => {
+                    inputRefs.current[index] = el;
+                  }}
                   type="text"
                   inputMode="numeric"
                   maxLength={1}

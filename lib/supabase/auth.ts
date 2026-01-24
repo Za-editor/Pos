@@ -99,12 +99,17 @@ export async function signInWithOAuth(
     provider,
     options: {
       redirectTo: `${window.location.origin}/auth/callback`,
+      skipBrowserRedirect: false,
       queryParams: {
         access_type: "offline",
         prompt: "consent",
       },
     },
   });
+
+  if (error) {
+    console.error("OAuth error:", error);
+  }
 
   return { data, error };
 }

@@ -8,12 +8,13 @@ export default async function DashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
-
   const { user } = await getCurrentUser();
-
   if (!user) {
+    console.log("No user, redirecting to login");
     redirect("/login");
   }
+
+  console.log("User authenticated, rendering dashboard");
 
   return (
     <div className="flex h-screen bg-gray-50">
