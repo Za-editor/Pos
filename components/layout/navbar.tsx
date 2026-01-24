@@ -69,7 +69,6 @@ export default function Navbar({ user }: NavbarProps) {
 
       {/* Right Section */}
       <div className="flex items-center gap-4">
-      
         <Button variant="ghost" size="icon" className="relative">
           <Bell className="h-5 w-5 text-gray-600" />
           {notifications > 0 && (
@@ -79,7 +78,6 @@ export default function Navbar({ user }: NavbarProps) {
           )}
         </Button>
 
-       
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <button className="flex items-center gap-3 hover:bg-gray-50 rounded-lg px-3 py-2 transition-colors">
@@ -116,14 +114,14 @@ export default function Navbar({ user }: NavbarProps) {
               </Link>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem asChild>
-              <Link
-                href="/api/auth/logout"
-                className="cursor-pointer text-red-600"
-              >
-                <LogOut className="mr-2 h-4 w-4" />
-                <span>Logout</span>
-              </Link>
+            <DropdownMenuItem
+              onClick={async () => {
+                window.location.href = "/api/auth/logout";
+              }}
+              className="cursor-pointer text-red-600"
+            >
+              <LogOut className="mr-2 h-4 w-4" />
+              <span>Logout</span>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
