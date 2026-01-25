@@ -17,22 +17,46 @@ import {
   Warehouse,
   Tag,
   BarChart3,
+  UserCog,
   Boxes,
+  Gift,
+  Percent,
+  ShoppingBag,
+  DollarSign,
+  Building2,
+  Briefcase,
+  Calendar,
+  ClipboardList,
+  BookOpen,
+  MapPin,
+  MessageSquare,
+  HelpCircle,
+  LogOut,
 } from "lucide-react";
-
 
 interface MenuItem {
   title: string;
   icon: any;
   href?: string;
+  badge?: string;
   children?: MenuItem[];
 }
 
 const menuItems: MenuItem[] = [
   {
+    title: "Main",
+    icon: LayoutDashboard,
+    href: "/dashboard",
+  },
+  {
     title: "Dashboard",
     icon: LayoutDashboard,
     href: "/dashboard",
+  },
+  {
+    title: "Super Admin",
+    icon: UserCog,
+    href: "/dashboard/super-admin",
   },
   {
     title: "Inventory",
@@ -125,7 +149,79 @@ const menuItems: MenuItem[] = [
         icon: FileText,
         href: "/dashboard/sales/quotation",
       },
-      { title: "POS", icon: ShoppingCart, href: "/dashboard/sales/pos" },
+      { title: "POS", icon: ShoppingBag, href: "/dashboard/sales/pos" },
+    ],
+  },
+  {
+    title: "Promo",
+    icon: Gift,
+    children: [
+      { title: "Coupons", icon: Percent, href: "/dashboard/promo/coupons" },
+      { title: "Gift Card", icon: Gift, href: "/dashboard/promo/gift-card" },
+      { title: "Discount", icon: Percent, href: "/dashboard/promo/discount" },
+    ],
+  },
+  {
+    title: "Purchases",
+    icon: ShoppingBag,
+    children: [
+      {
+        title: "Purchases",
+        icon: ShoppingBag,
+        href: "/dashboard/purchases/purchases",
+      },
+      {
+        title: "Purchase Order",
+        icon: FileText,
+        href: "/dashboard/purchases/purchase-order",
+      },
+      {
+        title: "Purchase Return",
+        icon: ShoppingBag,
+        href: "/dashboard/purchases/purchase-return",
+      },
+    ],
+  },
+  {
+    title: "Finance & Accounts",
+    icon: DollarSign,
+    children: [
+      {
+        title: "Expenses",
+        icon: DollarSign,
+        href: "/dashboard/finance/expenses",
+      },
+      { title: "Income", icon: DollarSign, href: "/dashboard/finance/income" },
+      {
+        title: "Bank Accounts",
+        icon: Building2,
+        href: "/dashboard/finance/bank-accounts",
+      },
+      {
+        title: "Money Transfer",
+        icon: DollarSign,
+        href: "/dashboard/finance/money-transfer",
+      },
+      {
+        title: "Balance Sheet",
+        icon: FileText,
+        href: "/dashboard/finance/balance-sheet",
+      },
+      {
+        title: "Trial Balance",
+        icon: FileText,
+        href: "/dashboard/finance/trial-balance",
+      },
+      {
+        title: "Cash Flow",
+        icon: DollarSign,
+        href: "/dashboard/finance/cash-flow",
+      },
+      {
+        title: "Account Statement",
+        icon: FileText,
+        href: "/dashboard/finance/account-statement",
+      },
     ],
   },
   {
@@ -135,12 +231,38 @@ const menuItems: MenuItem[] = [
       { title: "Customers", icon: Users, href: "/dashboard/peoples/customers" },
       { title: "Billers", icon: Users, href: "/dashboard/peoples/billers" },
       { title: "Suppliers", icon: Users, href: "/dashboard/peoples/suppliers" },
-      { title: "Stores", icon: Users, href: "/dashboard/peoples/stores" },
+      { title: "Stores", icon: Building2, href: "/dashboard/peoples/stores" },
       {
         title: "Warehouses",
         icon: Warehouse,
         href: "/dashboard/peoples/warehouses",
       },
+    ],
+  },
+  {
+    title: "HRM",
+    icon: Briefcase,
+    children: [
+      { title: "Employees", icon: Users, href: "/dashboard/hrm/employees" },
+      {
+        title: "Departments",
+        icon: Building2,
+        href: "/dashboard/hrm/departments",
+      },
+      {
+        title: "Designation",
+        icon: Briefcase,
+        href: "/dashboard/hrm/designation",
+      },
+      { title: "Shifts", icon: Calendar, href: "/dashboard/hrm/shifts" },
+      {
+        title: "Attendence",
+        icon: ClipboardList,
+        href: "/dashboard/hrm/attendance",
+      },
+      { title: "Leaves", icon: Calendar, href: "/dashboard/hrm/leaves" },
+      { title: "Holidays", icon: Calendar, href: "/dashboard/hrm/holidays" },
+      { title: "Payroll", icon: DollarSign, href: "/dashboard/hrm/payroll" },
     ],
   },
   {
@@ -182,6 +304,76 @@ const menuItems: MenuItem[] = [
         icon: BarChart3,
         href: "/dashboard/reports/product-report",
       },
+      {
+        title: "Expense Report",
+        icon: BarChart3,
+        href: "/dashboard/reports/expense-report",
+      },
+      {
+        title: "Income Report",
+        icon: BarChart3,
+        href: "/dashboard/reports/income-report",
+      },
+      {
+        title: "Tax Report",
+        icon: BarChart3,
+        href: "/dashboard/reports/tax-report",
+      },
+      {
+        title: "Profit & Loss",
+        icon: BarChart3,
+        href: "/dashboard/reports/profit-loss",
+      },
+      {
+        title: "Annual Report",
+        icon: BarChart3,
+        href: "/dashboard/reports/annual-report",
+      },
+    ],
+  },
+  {
+    title: "User Management",
+    icon: UserCog,
+    children: [
+      { title: "Users", icon: Users, href: "/dashboard/user-management/users" },
+      {
+        title: "Roles & Permissions",
+        icon: UserCog,
+        href: "/dashboard/user-management/roles-permissions",
+      },
+      {
+        title: "Delete Account Request",
+        icon: UserCog,
+        href: "/dashboard/user-management/delete-requests",
+      },
+    ],
+  },
+  {
+    title: "Content (CMS)",
+    icon: BookOpen,
+    children: [
+      { title: "Pages", icon: FileText, href: "/dashboard/cms/pages" },
+      { title: "Blog", icon: BookOpen, href: "/dashboard/cms/blog" },
+      { title: "Location", icon: MapPin, href: "/dashboard/cms/location" },
+      {
+        title: "Testimonials",
+        icon: MessageSquare,
+        href: "/dashboard/cms/testimonials",
+      },
+      { title: "FAQ", icon: HelpCircle, href: "/dashboard/cms/faq" },
+    ],
+  },
+  {
+    title: "Pages",
+    icon: FileText,
+    children: [
+      { title: "Profile", icon: Users, href: "/dashboard/pages/profile" },
+      { title: "Authentication", icon: UserCog, href: "/login" },
+      { title: "Error Page", icon: FileText, href: "/404" },
+      { title: "Blank Page", icon: FileText, href: "/dashboard/pages/blank" },
+      { title: "Pricing", icon: DollarSign, href: "/dashboard/pages/pricing" },
+      { title: "Coming Soon", icon: FileText, href: "/coming-soon" },
+      { title: "Under Maintenance", icon: FileText, href: "/maintenance" },
     ],
   },
   {
@@ -208,13 +400,27 @@ const menuItems: MenuItem[] = [
         icon: Settings,
         href: "/dashboard/settings/system",
       },
+      {
+        title: "Financial Settings",
+        icon: Settings,
+        href: "/dashboard/settings/financial",
+      },
+      {
+        title: "Other Settings",
+        icon: Settings,
+        href: "/dashboard/settings/other",
+      },
     ],
+  },
+  {
+    title: "Logout",
+    icon: LogOut,
+    href: "/api/auth/logout",
   },
 ];
 
 export default function Sidebar() {
-  const [isCollapsed, setIsCollapsed] = useState(false);
-  const [openMenus, setOpenMenus] = useState<string[]>([]);
+  const [openMenus, setOpenMenus] = useState<string[]>(["Inventory"]); // Default open
   const pathname = usePathname();
 
   const toggleMenu = (title: string) => {
@@ -230,73 +436,62 @@ export default function Sidebar() {
     children?.some((child) => child.href && pathname === child.href);
 
   return (
-    <aside
-      className={cn(
-        "bg-white border-r border-gray-200 transition-all duration-300 flex flex-col",
-        isCollapsed ? "w-20" : "w-64",
-      )}
-    >
+    <aside className="w-64 bg-white border-r border-gray-100 flex flex-col h-screen overflow-hidden">
       {/* Logo */}
-      <div className="h-16 flex items-center justify-center border-b border-gray-200 px-4">
-        {!isCollapsed ? (
-          <div className="relative w-32 h-10">
-            <Image
-              src="/images/logo/logo.png"
-              alt="DreamsPOS"
-              fill
-              className="object-contain"
-              priority
-            />
-          </div>
-        ) : (
-          <Package className="h-8 w-8 text-[#FE9F43]" />
-        )}
+      <div className="h-16 flex items-center justify-center border-b border-gray-100 px-4 shrink-0">
+        <div className="relative w-32 h-10">
+          <Image
+            src="/images/logo/logo.png"
+            alt="DreamsPOS"
+            fill
+            className="object-contain"
+            priority
+          />
+        </div>
       </div>
 
-      {/* Navigation */}
-      <nav className="flex-1 overflow-y-auto py-4 px-2">
-        <div className="space-y-1">
+      {/* Navigation - Scrollable */}
+      <nav className="flex-1 overflow-y-auto py-4 px-3">
+        <div className="space-y-0.5">
           {menuItems.map((item) => (
             <div key={item.title}>
               {item.children ? (
-                // Parent with children
                 <div>
                   <button
                     onClick={() => toggleMenu(item.title)}
                     className={cn(
-                      "w-full flex items-center justify-between px-3 py-2 rounded-lg text-sm font-medium transition-colors",
+                      "w-full flex items-center justify-between px-3 py-2.5 rounded-md text-[13px] font-medium transition-colors",
                       isParentActive(item.children)
                         ? "bg-orange-50 text-[#FE9F43]"
                         : "text-gray-700 hover:bg-gray-50",
                     )}
                   >
                     <div className="flex items-center gap-3">
-                      <item.icon className="h-5 w-5 shrink-0" />
-                      {!isCollapsed && <span>{item.title}</span>}
+                      <item.icon className="h-4.5 w-4.5 shrink-0" />
+                      <span>{item.title}</span>
                     </div>
-                    {!isCollapsed &&
-                      (openMenus.includes(item.title) ? (
-                        <ChevronDown className="h-4 w-4" />
-                      ) : (
-                        <ChevronRight className="h-4 w-4" />
-                      ))}
+                    {openMenus.includes(item.title) ? (
+                      <ChevronDown className="h-4 w-4" />
+                    ) : (
+                      <ChevronRight className="h-4 w-4" />
+                    )}
                   </button>
 
                   {/* Submenu */}
-                  {!isCollapsed && openMenus.includes(item.title) && (
-                    <div className="ml-4 mt-1 space-y-1">
+                  {openMenus.includes(item.title) && (
+                    <div className="ml-6 mt-1 space-y-0.5 border-l border-gray-200 pl-2">
                       {item.children.map((child) => (
                         <Link
                           key={child.title}
                           href={child.href || "#"}
                           className={cn(
-                            "flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors",
+                            "flex items-center gap-3 px-3 py-2 rounded-md text-[13px] transition-colors",
                             isActive(child.href || "")
                               ? "bg-orange-50 text-[#FE9F43] font-medium"
-                              : "text-gray-600 hover:bg-gray-50",
+                              : "text-gray-600 hover:bg-gray-50 hover:text-gray-900",
                           )}
                         >
-                          <child.icon className="h-4 w-4 shrink-0" />
+                          <child.icon className="h-4.5 w-4.5 shrink-0 opacity-60" />
                           <span>{child.title}</span>
                         </Link>
                       ))}
@@ -304,41 +499,25 @@ export default function Sidebar() {
                   )}
                 </div>
               ) : (
-                
                 <Link
                   href={item.href || "#"}
                   className={cn(
-                    "flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors",
+                    "flex items-center gap-3 px-3 py-2.5 rounded-md text-[13px] font-medium transition-colors",
                     isActive(item.href || "")
                       ? "bg-orange-50 text-[#FE9F43]"
-                      : "text-gray-700 hover:bg-gray-50",
+                      : item.title === "Logout"
+                        ? "text-red-600 hover:bg-red-50"
+                        : "text-gray-700 hover:bg-gray-50",
                   )}
                 >
-                  <item.icon className="h-5 w-5 shrink-0" />
-                  {!isCollapsed && <span>{item.title}</span>}
+                  <item.icon className="h-4.5 w-4.5 shrink-0" />
+                  <span>{item.title}</span>
                 </Link>
               )}
             </div>
           ))}
         </div>
       </nav>
-
-      {/* Collapse Toggle */}
-      <div className="border-t border-gray-200 p-4">
-        <button
-          onClick={() => setIsCollapsed(!isCollapsed)}
-          className="w-full flex items-center justify-center px-3 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
-        >
-          {isCollapsed ? (
-            <ChevronRight className="h-5 w-5" />
-          ) : (
-            <>
-              <ChevronRight className="h-5 w-5 mr-2" />
-              <span>Collapse</span>
-            </>
-          )}
-        </button>
-      </div>
     </aside>
   );
 }
