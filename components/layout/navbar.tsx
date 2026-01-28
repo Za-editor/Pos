@@ -14,11 +14,8 @@ import {
   Plus,
   CommandIcon,
   Laptop2,
-  Flag,
-  Maximize2,
   Maximize,
   Mail,
-  Settings2,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -125,7 +122,7 @@ export default function Navbar({ user }: NavbarProps) {
 
         {/* Country, Notification bell,mail, and settings */}
         <div className="flex gap-3 pl-4  border-l">
-          <div className=" w-10 h-10 bg-gray-200 rounded-lg flex justify-center p-2 items-center">
+          <div className=" w-10 h-10 bg-gray-200 rounded-lg flex justify-center p-2 items-center cursor-pointer hover:bg-gray-300 transition-all duration-300">
             <Image
               src="/images/usa.png"
               alt="Country"
@@ -135,19 +132,19 @@ export default function Navbar({ user }: NavbarProps) {
             />
           </div>
 
-          <div className=" w-10 h-10 bg-gray-200 rounded-lg flex justify-center p-2 items-center">
+          <div className=" w-10 h-10 bg-gray-200 rounded-lg flex justify-center p-2 items-center cursor-pointer hover:bg-gray-300 transition-all duration-300">
             <Maximize className="h-4 w-4 stroke-[3px] text-gray-600" />
           </div>
-          <div className=" w-10 h-10 bg-gray-200 rounded-lg flex justify-center p-2 items-center relative">
+          <div className=" w-10 h-10 bg-gray-200 rounded-lg flex justify-center p-2 items-center relative cursor-pointer hover:bg-gray-300 transition-all duration-300">
             <Mail className="h-4 w-4 text-gray-600" />
             <span className="absolute -top-2 right-0 h-4 w-4 bg-red-500 rounded-full flex justify-center items-center text-sm text-white ">
               1
             </span>
           </div>
-          <div className=" w-10 h-10 bg-gray-200 rounded-lg flex justify-center p-2 items-center ">
+          <div className=" w-10 h-10 bg-gray-200 rounded-lg flex justify-center p-2 items-center cursor-pointer hover:bg-gray-300 transition-all duration-300">
             <Bell className="h-5 w-5 text-gray-600" />
           </div>
-          <div className=" w-10 h-10 bg-gray-200 rounded-lg flex justify-center p-2 items-center ">
+          <div className=" w-10 h-10 bg-gray-200 rounded-lg flex justify-center p-2 items-center cursor-pointer hover:bg-gray-300 transition-all duration-300">
             <Settings className="h-5 w-5 text-gray-600" />
           </div>
         </div>

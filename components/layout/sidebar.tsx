@@ -18,7 +18,6 @@ import {
   Tag,
   BarChart3,
   UserCog,
-  Boxes,
   Gift,
   Percent,
   ShoppingBag,
@@ -32,6 +31,19 @@ import {
   MessageSquare,
   HelpCircle,
   LogOut,
+  Table,
+  AlertCircle,
+  TrendingUp,
+  ListCheck,
+  Triangle,
+  Box,
+  CheckLine,
+  CakeSlice,
+  Barcode,
+  QrCode,
+  FileStack,
+  FileTerminal,
+  Quote
 } from "lucide-react";
 
 interface MenuItem {
@@ -43,11 +55,7 @@ interface MenuItem {
 }
 
 const menuItems: MenuItem[] = [
-  {
-    title: "Main",
-    icon: LayoutDashboard,
-    href: "/dashboard",
-  },
+
   {
     title: "Dashboard",
     icon: LayoutDashboard,
@@ -69,45 +77,45 @@ const menuItems: MenuItem[] = [
       },
       {
         title: "Create Product",
-        icon: Package,
+        icon: Table,
         href: "/dashboard/inventory/products/create",
       },
       {
         title: "Expired Products",
-        icon: Package,
+        icon: AlertCircle,
         href: "/dashboard/inventory/products/expired",
       },
       {
         title: "Low Stocks",
-        icon: Package,
+        icon: TrendingUp,
         href: "/dashboard/inventory/products/low-stocks",
       },
-      { title: "Category", icon: Tag, href: "/dashboard/inventory/category" },
+      { title: "Category", icon: ListCheck, href: "/dashboard/inventory/category" },
       {
         title: "Sub Category",
         icon: Tag,
         href: "/dashboard/inventory/sub-category",
       },
-      { title: "Brands", icon: Tag, href: "/dashboard/inventory/brands" },
-      { title: "Units", icon: Boxes, href: "/dashboard/inventory/units" },
+      { title: "Brands", icon: Triangle, href: "/dashboard/inventory/brands" },
+      { title: "Units", icon: Box, href: "/dashboard/inventory/units" },
       {
         title: "Variant Attributes",
-        icon: Tag,
+        icon: CheckLine,
         href: "/dashboard/inventory/variant-attributes",
       },
       {
         title: "Warranties",
-        icon: FileText,
+        icon: CakeSlice,
         href: "/dashboard/inventory/warranties",
       },
       {
         title: "Print Barcode",
-        icon: FileText,
+        icon: Barcode,
         href: "/dashboard/inventory/print-barcode",
       },
       {
         title: "Print QR Code",
-        icon: FileText,
+        icon: QrCode,
         href: "/dashboard/inventory/print-qr",
       },
     ],
@@ -118,17 +126,17 @@ const menuItems: MenuItem[] = [
     children: [
       {
         title: "Manage Stock",
-        icon: Warehouse,
+        icon: FileStack,
         href: "/dashboard/stock/manage-stock",
       },
       {
         title: "Stock Adjustment",
-        icon: Warehouse,
+        icon: TrendingUp,
         href: "/dashboard/stock/stock-adjustment",
       },
       {
         title: "Stock Transfer",
-        icon: Warehouse,
+        icon: FileTerminal,
         href: "/dashboard/stock/stock-transfer",
       },
     ],
@@ -141,7 +149,7 @@ const menuItems: MenuItem[] = [
       { title: "Invoices", icon: FileText, href: "/dashboard/sales/invoices" },
       {
         title: "Sales Return",
-        icon: ShoppingCart,
+        icon: Quote,
         href: "/dashboard/sales/sales-return",
       },
       {
@@ -453,6 +461,7 @@ export default function Sidebar() {
       {/* Navigation - Scrollable */}
       <nav className="flex-1 overflow-y-auto py-4 px-3">
         <div className="space-y-0.5">
+          <p className="text-[14px] font-medium px-3 pb-2">Main</p>
           {menuItems.map((item) => (
             <div key={item.title}>
               {item.children ? (

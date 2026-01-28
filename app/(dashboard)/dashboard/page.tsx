@@ -61,8 +61,7 @@ export default async function DashboardPage() {
                Authentication Working!
             </h2>
             <p className="text-sm text-green-800">
-              Your authentication system is now fully functional. You can start
-              building the rest of your dashboard.
+             Authentication system is now fully functional. 
             </p>
           </div>
         </div>
