@@ -43,7 +43,14 @@ import {
   QrCode,
   FileStack,
   FileTerminal,
-  Quote
+  Quote,
+  FilePenLine,
+  BaggageClaim,
+  ZoomIn,
+  UserPlus,
+  Users2,
+  Delete,
+  ChevronsLeft
 } from "lucide-react";
 
 interface MenuItem {
@@ -53,6 +60,7 @@ interface MenuItem {
   badge?: string;
   children?: MenuItem[];
 }
+
 
 const menuItems: MenuItem[] = [
 
@@ -196,10 +204,10 @@ const menuItems: MenuItem[] = [
     children: [
       {
         title: "Expenses",
-        icon: DollarSign,
+        icon: FileStack,
         href: "/dashboard/finance/expenses",
       },
-      { title: "Income", icon: DollarSign, href: "/dashboard/finance/income" },
+      { title: "Income", icon: FilePenLine, href: "/dashboard/finance/income" },
       {
         title: "Bank Accounts",
         icon: Building2,
@@ -207,7 +215,7 @@ const menuItems: MenuItem[] = [
       },
       {
         title: "Money Transfer",
-        icon: DollarSign,
+        icon: BaggageClaim,
         href: "/dashboard/finance/money-transfer",
       },
       {
@@ -217,12 +225,12 @@ const menuItems: MenuItem[] = [
       },
       {
         title: "Trial Balance",
-        icon: FileText,
+        icon: AlertCircle,
         href: "/dashboard/finance/trial-balance",
       },
       {
         title: "Cash Flow",
-        icon: DollarSign,
+        icon: ZoomIn,
         href: "/dashboard/finance/cash-flow",
       },
       {
@@ -237,8 +245,8 @@ const menuItems: MenuItem[] = [
     icon: Users,
     children: [
       { title: "Customers", icon: Users, href: "/dashboard/peoples/customers" },
-      { title: "Billers", icon: Users, href: "/dashboard/peoples/billers" },
-      { title: "Suppliers", icon: Users, href: "/dashboard/peoples/suppliers" },
+      { title: "Billers", icon: Users2, href: "/dashboard/peoples/billers" },
+      { title: "Suppliers", icon: UserPlus, href: "/dashboard/peoples/suppliers" },
       { title: "Stores", icon: Building2, href: "/dashboard/peoples/stores" },
       {
         title: "Warehouses",
@@ -351,7 +359,7 @@ const menuItems: MenuItem[] = [
       },
       {
         title: "Delete Account Request",
-        icon: UserCog,
+        icon: Delete,
         href: "/dashboard/user-management/delete-requests",
       },
     ],
@@ -428,7 +436,8 @@ const menuItems: MenuItem[] = [
 ];
 
 export default function Sidebar() {
-  const [openMenus, setOpenMenus] = useState<string[]>(["Inventory"]); // Default open
+  const [openMenus, setOpenMenus] = useState<string[]>(["Inventory"]); 
+  const [collapsed, setCollapsed] = useState(false);
   const pathname = usePathname();
 
   const toggleMenu = (title: string) => {
@@ -444,24 +453,47 @@ export default function Sidebar() {
     children?.some((child) => child.href && pathname === child.href);
 
   return (
-    <aside className="w-64 bg-white border-r border-gray-100 flex flex-col h-screen overflow-hidden">
+    <aside
+      className={cn(
+        "bg-white border-r border-gray-100 flex flex-col h-screen overflow-hidden transition-all duration-300",
+        collapsed ? "w-20" : "w-64",
+      )}
+    >
       {/* Logo */}
-      <div className="h-16 flex items-center justify-center border-b border-gray-100 px-4 shrink-0">
-        <div className="relative w-32 h-10">
+      <div className="relative h-16 flex items-center justify-center border-b border-gray-100 px-4 shrink-0">
+        <div className={cn("relative w-32 h-10 transition-all")}>
           <Image
-            src="/images/logo/logo.png"
+            src={
+              collapsed ? "/images/logo/Minilogo.png" : "/images/logo/logo.png"
+            }
             alt="DreamsPOS"
             fill
-            className="object-contain"
+            className="object-contain transition-all duration-300"
             priority
           />
         </div>
+        <span
+          onClick={() => {
+            setCollapsed((prev) => !prev);
+            if (!collapsed) setOpenMenus([]);
+          }}
+          className="absolute bg-[#FE9F43] rounded-full p-0.5 z-1000 right-0 cursor-pointer"
+        >
+          <ChevronsLeft
+            className={cn(
+              "text-white transition-transform duration-300 h-4 w-4",
+              collapsed && "rotate-180",
+            )}
+          />
+        </span>
       </div>
 
       {/* Navigation - Scrollable */}
       <nav className="flex-1 overflow-y-auto py-4 px-3">
         <div className="space-y-0.5">
-          <p className="text-[14px] font-medium px-3 pb-2">Main</p>
+          {!collapsed && (
+            <p className="text-[14px] font-medium px-3 pb-2">Main</p>
+          )}
           {menuItems.map((item) => (
             <div key={item.title}>
               {item.children ? (
@@ -477,17 +509,22 @@ export default function Sidebar() {
                   >
                     <div className="flex items-center gap-3">
                       <item.icon className="h-4.5 w-4.5 shrink-0" />
-                      <span>{item.title}</span>
+                      <span
+                        className={`transition-all" ${collapsed && "hidden"}`}
+                      >
+                        {item.title}
+                      </span>
                     </div>
-                    {openMenus.includes(item.title) ? (
-                      <ChevronDown className="h-4 w-4" />
-                    ) : (
-                      <ChevronRight className="h-4 w-4" />
-                    )}
+                    {!collapsed &&
+                      (openMenus.includes(item.title) ? (
+                        <ChevronDown className="h-4 w-4" />
+                      ) : (
+                        <ChevronRight className="h-4 w-4" />
+                      ))}
                   </button>
 
                   {/* Submenu */}
-                  {openMenus.includes(item.title) && (
+                  {openMenus.includes(item.title) && !collapsed && (
                     <div className="ml-6 mt-1 space-y-0.5 border-l border-gray-200 pl-2">
                       {item.children.map((child) => (
                         <Link
@@ -520,7 +557,9 @@ export default function Sidebar() {
                   )}
                 >
                   <item.icon className="h-4.5 w-4.5 shrink-0" />
-                  <span>{item.title}</span>
+                  <span className={cn("transition-all", collapsed && "hidden")}>
+                    {item.title}
+                  </span>
                 </Link>
               )}
             </div>
