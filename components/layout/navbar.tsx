@@ -12,6 +12,13 @@ import {
   Loader2,
   ShoppingBag,
   Plus,
+  CommandIcon,
+  Laptop2,
+  Flag,
+  Maximize2,
+  Maximize,
+  Mail,
+  Settings2,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -27,6 +34,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
 import { toast } from "sonner";
+import Image from "next/image";
 
 interface NavbarProps {
   user: {
@@ -51,8 +59,9 @@ export default function Navbar({ user }: NavbarProps) {
       toast.success("Logged out successfully");
       router.push("/login");
       router.refresh();
-    } catch (err: any) {
-      toast.error("Logout Failed", { description: err.message });
+    } catch (err) {
+      toast.error("Logout Failed");
+      console.log(err);
     } finally {
       setLoggingOut(false);
     }
@@ -62,9 +71,9 @@ export default function Navbar({ user }: NavbarProps) {
     user.user_metadata?.full_name || user.email?.split("@")[0] || "User";
 
   return (
-    <header className="h-[70px] bg-white border-b border-gray-100 px-6 flex items-center justify-between sticky top-0 z-40">
+    <header className="h-17.5 bg-white border-b border-gray-100 px-6 flex items-center justify-between sticky top-0 z-40">
       {/* Left Section - Unified Search Bar */}
-      <div className="flex-1 max-w-[400px]">
+      <div className="flex-1 max-w-75">
         <div className="relative group">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400 group-focus-within:text-[#FE9F43] transition-colors" />
           <Input
@@ -72,16 +81,13 @@ export default function Navbar({ user }: NavbarProps) {
             placeholder="Search"
             className="pl-10 h-10 bg-gray-50 border-gray-100 rounded-lg focus-visible:ring-1 focus-visible:ring-[#FE9F43] focus-visible:bg-white text-sm transition-all"
           />
+
+          <CommandIcon className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#092C4C] group-focus-within:text-[#FE9F43] transition-colors" />
         </div>
       </div>
 
       {/* Right Section - Store Selector, Action Button, and User Profile */}
       <div className="flex items-center gap-4">
-        {/* Localization Badge (e.g., HK) */}
-        <button className="hidden sm:flex items-center justify-center w-8 h-8 rounded-full bg-blue-50 text-[10px] font-bold text-blue-600 border border-blue-100 hover:bg-blue-100 transition-colors">
-          HK
-        </button>
-
         {/* Store Selection Dropdown */}
         <div className="hidden lg:flex items-center gap-2 bg-gray-50 border border-gray-100 px-3 py-1.5 rounded-lg hover:bg-gray-100 transition-colors cursor-pointer">
           <ShoppingBag className="h-4 w-4 text-gray-500" />
@@ -91,7 +97,7 @@ export default function Navbar({ user }: NavbarProps) {
           <ChevronDown className="h-3 w-3 text-gray-400" />
         </div>
 
-        {/* Action Button: Add New POS */}
+        {/*Add New POS */}
         <Button
           asChild
           className="bg-[#FE9F43] hover:bg-[#f09a42] text-white h-10 px-4 rounded-lg shadow-sm shadow-orange-100 transition-all active:scale-95"
@@ -101,19 +107,50 @@ export default function Navbar({ user }: NavbarProps) {
             className="flex items-center gap-2 font-bold text-xs uppercase tracking-wider"
           >
             <Plus className="h-4 w-4 stroke-[3px]" />
-            Add New POS
+            Add New
+          </Link>
+        </Button>
+        <Button
+          asChild
+          className="bg-[#092C4C] hover:bg-[#17426B] text-white h-10 px-4 rounded-lg transition-all active:scale-95"
+        >
+          <Link
+            href="/dashboard/sales/pos"
+            className="flex items-center gap-2 font-bold text-xs uppercase tracking-wider"
+          >
+            <Laptop2 className="h-4 w-4 stroke-[3px]" />
+            POS
           </Link>
         </Button>
 
-        {/* Notification Bell */}
-        <Button
-          variant="ghost"
-          size="icon"
-          className="relative h-10 w-10 hover:bg-gray-50 text-gray-500"
-        >
-          <Bell className="h-5 w-5" />
-          <span className="absolute top-2.5 right-3 h-2 w-2 bg-orange-500 rounded-full border-2 border-white"></span>
-        </Button>
+        {/* Country, Notification bell,mail, and settings */}
+        <div className="flex gap-3 pl-4  border-l">
+          <div className=" w-10 h-10 bg-gray-200 rounded-lg flex justify-center p-2 items-center">
+            <Image
+              src="/images/usa.png"
+              alt="Country"
+              width={40}
+              height={40}
+              className="object-fit"
+            />
+          </div>
+
+          <div className=" w-10 h-10 bg-gray-200 rounded-lg flex justify-center p-2 items-center">
+            <Maximize className="h-4 w-4 stroke-[3px] text-gray-600" />
+          </div>
+          <div className=" w-10 h-10 bg-gray-200 rounded-lg flex justify-center p-2 items-center relative">
+            <Mail className="h-4 w-4 text-gray-600" />
+            <span className="absolute -top-2 right-0 h-4 w-4 bg-red-500 rounded-full flex justify-center items-center text-sm text-white ">
+              1
+            </span>
+          </div>
+          <div className=" w-10 h-10 bg-gray-200 rounded-lg flex justify-center p-2 items-center ">
+            <Bell className="h-5 w-5 text-gray-600" />
+          </div>
+          <div className=" w-10 h-10 bg-gray-200 rounded-lg flex justify-center p-2 items-center ">
+            <Settings className="h-5 w-5 text-gray-600" />
+          </div>
+        </div>
 
         {/* Profile and ID Section */}
         <div className="flex items-center gap-3 pl-2 border-l border-gray-100 ml-2">
@@ -130,12 +167,6 @@ export default function Navbar({ user }: NavbarProps) {
                   <div className="absolute bottom-0 right-0 h-2.5 w-2.5 bg-green-500 rounded-full border-2 border-white"></div>
                 </div>
 
-                <div className="text-left hidden xl:block">
-                  <p className="text-[13px] font-bold text-gray-900 leading-tight group-hover:text-[#FE9F43] transition-colors">
-                    {displayName}
-                  </p>
-                  <p className="text-[11px] text-gray-500 font-medium">Admin</p>
-                </div>
                 <ChevronDown className="h-4 w-4 text-gray-400 group-hover:text-gray-600 transition-all" />
               </button>
             </DropdownMenuTrigger>
@@ -181,11 +212,6 @@ export default function Navbar({ user }: NavbarProps) {
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
-
-          {/* User ID Badge: 01 */}
-          <div className="hidden sm:flex items-center justify-center bg-[#FE9F43] text-white w-8 h-8 rounded-md text-[11px] font-black shadow-sm shadow-orange-100">
-            01
-          </div>
         </div>
       </div>
     </header>
