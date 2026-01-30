@@ -36,6 +36,9 @@ import { LowStockProducts } from "@/components/dashboard/low-stock-widget";
 import { RecentSales } from "@/components/dashboard/recent-sales-widget";
 import { SalesStaticsCard } from "@/components/dashboard/sales-statics";
 import { RecentTransactionsCard } from "@/components/dashboard/recent-transactions";
+import { TopCustomersCard } from "@/components/dashboard/top-customers-widget";
+import { TopCategoriesCard } from "@/components/dashboard/category-chart";
+import { OrderHeatmapChart,} from "@/components/dashboard/order-heatmap";
 
 const data = [
   { month: "Jan", purchase: 52000, sales: 18000 },
@@ -347,65 +350,10 @@ export default function DashboardPage() {
 
       {/* Transactions + Customers + Categories + Orders */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <Card className="lg:col-span-2">
-          <CardHeader>
-            <CardTitle>Recent Transactions</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <Tabs defaultValue="sale">
-              <TabsList>
-                <TabsTrigger value="sale">Sale</TabsTrigger>
-                <TabsTrigger value="purchase">Purchase</TabsTrigger>
-                <TabsTrigger value="quotation">Quotation</TabsTrigger>
-                <TabsTrigger value="expenses">Expenses</TabsTrigger>
-                <TabsTrigger value="invoices">Invoices</TabsTrigger>
-              </TabsList>
-              <TabsContent value="sale" className="space-y-3 mt-4">
-                {[1, 2, 3, 4].map((i) => (
-                  <div
-                    key={i}
-                    className="flex justify-between border p-3 rounded"
-                  >
-                    <span>Customer {i}</span>
-                    <span>$----</span>
-                  </div>
-                ))}
-              </TabsContent>
-            </Tabs>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <CardTitle>Top Customers</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-3">
-            {[1, 2, 3, 4, 5].map((i) => (
-              <div key={i} className="flex justify-between border p-3 rounded">
-                <span>Customer {i}</span>
-                <span>$----</span>
-              </div>
-            ))}
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <CardTitle>Order Statistics</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-center font-semibold mb-3">297 Orders</p>
-            <div className="grid grid-cols-7 gap-1 h-40">
-              {Array.from({ length: 7 }).map((_, d) => (
-                <div key={d} className="flex flex-col-reverse gap-1">
-                  {Array.from({ length: 12 }).map((_, i) => (
-                    <div key={i} className="h-3 rounded bg-orange-200" />
-                  ))}
-                </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
+        <TopCustomersCard />
+        <TopCategoriesCard />
+        <OrderHeatmapChart/>
+        {/* <OrderStatisticsCard/> */}
       </div>
     </div>
   );
