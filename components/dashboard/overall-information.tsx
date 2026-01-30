@@ -115,7 +115,7 @@ function Metric({ value, label, percent, color, bg }: any) {
       <p className="text-2xl font-semibold">{value}</p>
       <p className={`text-sm ${color}`}>{label}</p>
       <span
-        className={`inline-block text-xs px-2 py-0.5 rounded-md text-white ${bg}`}
+        className={`inline-block text-xs px-2 py-0.5 rounded-md ${color} ${bg}`}
       >
         ↑ {percent}
       </span>

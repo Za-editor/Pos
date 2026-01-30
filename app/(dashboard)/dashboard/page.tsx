@@ -31,6 +31,11 @@ import {
 
 } from "recharts";
 import OverallInformationCard from "@/components/dashboard/overall-information";
+import { TopSellingProducts } from "@/components/dashboard/top-products-widget";
+import { LowStockProducts } from "@/components/dashboard/low-stock-widget";
+import { RecentSales } from "@/components/dashboard/recent-sales-widget";
+import { SalesStaticsCard } from "@/components/dashboard/sales-statics";
+import { RecentTransactionsCard } from "@/components/dashboard/recent-transactions";
 
 const data = [
   { month: "Jan", purchase: 52000, sales: 18000 },
@@ -319,74 +324,25 @@ export default function DashboardPage() {
           </ResponsiveContainer>
         </div>
         <div className="w-2/6">
-        <OverallInformationCard/></div>
-
+          <OverallInformationCard />
+        </div>
       </div>
 
       {/* Top Selling / Low Stock / Recent Sales */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <Card>
-          <CardHeader>
-            <CardTitle>Top Selling Products</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-3">
-            {[
-              "Charger Cable - Lighting",
-              "Yves Saint Eau De Parfum",
-              "Apple Airpods 2",
-              "Vacuum Cleaner",
-              "Samsung Galaxy S21 Fe 5g",
-            ].map((n, i) => (
-              <div key={i} className="flex justify-between">
-                <div>
-                  <p className="text-sm font-medium">{n}</p>
-                  <p className="text-xs text-gray-500">$---</p>
-                </div>
-                <span className="text-xs text-green-600">25%</span>
-              </div>
-            ))}
-          </CardContent>
-        </Card>
+        <TopSellingProducts />
 
-        <Card>
-          <CardHeader className="flex justify-between">
-            <CardTitle>Low Stock Products</CardTitle>
-            <Button variant="link" size="sm">
-              View All
-            </Button>
-          </CardHeader>
-          <CardContent className="space-y-3">
-            {[21, 8, 14, 12, 10].map((v, i) => (
-              <div
-                key={i}
-                className="flex justify-between bg-gray-50 p-3 rounded"
-              >
-                <span className="text-sm">Product {i + 1}</span>
-                <span className="text-orange-500 font-semibold">{v}</span>
-              </div>
-            ))}
-          </CardContent>
-        </Card>
+        <LowStockProducts />
 
-        <Card>
-          <CardHeader>
-            <CardTitle>Recent Sales</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-3">
-            {[
-              "Processing",
-              "Cancelled",
-              "Onhold",
-              "Processing",
-              "Completed",
-            ].map((s, i) => (
-              <div key={i} className="flex justify-between border p-3 rounded">
-                <span className="text-sm">Product {i + 1}</span>
-                <span className="text-xs">{s}</span>
-              </div>
-            ))}
-          </CardContent>
-        </Card>
+        <RecentSales />
+      </div>
+
+      {/* Sales Statics / Recent transactions */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <SalesStaticsCard/>
+
+        <RecentTransactionsCard/>
+
       </div>
 
       {/* Transactions + Customers + Categories + Orders */}
