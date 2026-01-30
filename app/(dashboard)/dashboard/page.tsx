@@ -27,7 +27,10 @@ import {
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
+
+
 } from "recharts";
+import OverallInformationCard from "@/components/dashboard/overall-information";
 
 const data = [
   { month: "Jan", purchase: 52000, sales: 18000 },
@@ -250,7 +253,7 @@ export default function DashboardPage() {
 
       {/* Sales & Purchase + Overall Info */}
       <div className="flex gap-6">
-        <div className="w-3/5 bg-white rounded-2xl p-6 shadow-sm">
+        <div className="w-4/6 bg-white rounded-2xl p-6 shadow-sm">
           <div className="flex items-center justify-between pb-4 mb-5 border-b border-gray-200">
             <div className="flex gap-2 items-center">
               <div className="p-4 bg-[#FFF6EE] rounded-xl">
@@ -315,24 +318,9 @@ export default function DashboardPage() {
             </BarChart>
           </ResponsiveContainer>
         </div>
+        <div className="w-2/6">
+        <OverallInformationCard/></div>
 
-        <Card className="w-2/5">
-          <CardHeader>
-            <CardTitle>Overall Information</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-3">
-            {[
-              ["Suppliers", "6987"],
-              ["Customer", "4896"],
-              ["Orders", "487"],
-            ].map(([l, v]) => (
-              <div key={l} className="flex justify-between text-sm">
-                <span className="text-gray-500">{l}</span>
-                <span className="font-semibold">{v}</span>
-              </div>
-            ))}
-          </CardContent>
-        </Card>
       </div>
 
       {/* Top Selling / Low Stock / Recent Sales */}
