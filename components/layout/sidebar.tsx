@@ -50,7 +50,7 @@ import {
   UserPlus,
   Users2,
   Delete,
-  ChevronsLeft
+  ChevronsLeft,
 } from "lucide-react";
 
 interface MenuItem {
@@ -61,9 +61,7 @@ interface MenuItem {
   children?: MenuItem[];
 }
 
-
 const menuItems: MenuItem[] = [
-
   {
     title: "Dashboard",
     icon: LayoutDashboard,
@@ -81,50 +79,50 @@ const menuItems: MenuItem[] = [
       {
         title: "Products",
         icon: Package,
-        href: "/dashboard/inventory/products",
+        href: "/inventory/products",
       },
       {
         title: "Create Product",
         icon: Table,
-        href: "/dashboard/inventory/products/create",
+        href: "/inventory/products/create",
       },
       {
         title: "Expired Products",
         icon: AlertCircle,
-        href: "/dashboard/inventory/products/expired",
+        href: "/inventory/products/expired",
       },
       {
         title: "Low Stocks",
         icon: TrendingUp,
-        href: "/dashboard/inventory/products/low-stocks",
+        href: "/inventory/products/low-stocks",
       },
-      { title: "Category", icon: ListCheck, href: "/dashboard/inventory/category" },
+      { title: "Category", icon: ListCheck, href: "/inventory/category" },
       {
         title: "Sub Category",
         icon: Tag,
-        href: "/dashboard/inventory/sub-category",
+        href: "/inventory/sub-category",
       },
-      { title: "Brands", icon: Triangle, href: "/dashboard/inventory/brands" },
-      { title: "Units", icon: Box, href: "/dashboard/inventory/units" },
+      { title: "Brands", icon: Triangle, href: "/inventory/brands" },
+      { title: "Units", icon: Box, href: "/inventory/units" },
       {
         title: "Variant Attributes",
         icon: CheckLine,
-        href: "/dashboard/inventory/variant-attributes",
+        href: "/inventory/variant-attributes",
       },
       {
         title: "Warranties",
         icon: CakeSlice,
-        href: "/dashboard/inventory/warranties",
+        href: "/inventory/warranties",
       },
       {
         title: "Print Barcode",
         icon: Barcode,
-        href: "/dashboard/inventory/print-barcode",
+        href: "/inventory/print-barcode",
       },
       {
         title: "Print QR Code",
         icon: QrCode,
-        href: "/dashboard/inventory/print-qr",
+        href: "/inventory/print-qr",
       },
     ],
   },
@@ -135,17 +133,17 @@ const menuItems: MenuItem[] = [
       {
         title: "Manage Stock",
         icon: FileStack,
-        href: "/dashboard/stock/manage-stock",
+        href: "/stock/manage-stock",
       },
       {
         title: "Stock Adjustment",
         icon: TrendingUp,
-        href: "/dashboard/stock/stock-adjustment",
+        href: "/stock/stock-adjustment",
       },
       {
         title: "Stock Transfer",
         icon: FileTerminal,
-        href: "/dashboard/stock/stock-transfer",
+        href: "/stock/stock-transfer",
       },
     ],
   },
@@ -158,23 +156,23 @@ const menuItems: MenuItem[] = [
       {
         title: "Sales Return",
         icon: Quote,
-        href: "/dashboard/sales/sales-return",
+        href: "/sales/sales-return",
       },
       {
         title: "Quotation",
         icon: FileText,
-        href: "/dashboard/sales/quotation",
+        href: "/sales/quotation",
       },
-      { title: "POS", icon: ShoppingBag, href: "/dashboard/sales/pos" },
+      { title: "POS", icon: ShoppingBag, href: "/sales/pos" },
     ],
   },
   {
     title: "Promo",
     icon: Gift,
     children: [
-      { title: "Coupons", icon: Percent, href: "/dashboard/promo/coupons" },
-      { title: "Gift Card", icon: Gift, href: "/dashboard/promo/gift-card" },
-      { title: "Discount", icon: Percent, href: "/dashboard/promo/discount" },
+      { title: "Coupons", icon: Percent, href: "/promo/coupons" },
+      { title: "Gift Card", icon: Gift, href: "/promo/gift-card" },
+      { title: "Discount", icon: Percent, href: "/promo/discount" },
     ],
   },
   {
@@ -184,17 +182,17 @@ const menuItems: MenuItem[] = [
       {
         title: "Purchases",
         icon: ShoppingBag,
-        href: "/dashboard/purchases/purchases",
+        href: "/purchases/purchases",
       },
       {
         title: "Purchase Order",
         icon: FileText,
-        href: "/dashboard/purchases/purchase-order",
+        href: "/purchases/purchase-order",
       },
       {
         title: "Purchase Return",
         icon: ShoppingBag,
-        href: "/dashboard/purchases/purchase-return",
+        href: "/purchases/purchase-return",
       },
     ],
   },
@@ -205,38 +203,38 @@ const menuItems: MenuItem[] = [
       {
         title: "Expenses",
         icon: FileStack,
-        href: "/dashboard/finance/expenses",
+        href: "/finance/expenses",
       },
-      { title: "Income", icon: FilePenLine, href: "/dashboard/finance/income" },
+      { title: "Income", icon: FilePenLine, href: "/finance/income" },
       {
         title: "Bank Accounts",
         icon: Building2,
-        href: "/dashboard/finance/bank-accounts",
+        href: "/finance/bank-accounts",
       },
       {
         title: "Money Transfer",
         icon: BaggageClaim,
-        href: "/dashboard/finance/money-transfer",
+        href: "/finance/money-transfer",
       },
       {
         title: "Balance Sheet",
         icon: FileText,
-        href: "/dashboard/finance/balance-sheet",
+        href: "/finance/balance-sheet",
       },
       {
         title: "Trial Balance",
         icon: AlertCircle,
-        href: "/dashboard/finance/trial-balance",
+        href: "/finance/trial-balance",
       },
       {
         title: "Cash Flow",
         icon: ZoomIn,
-        href: "/dashboard/finance/cash-flow",
+        href: "/finance/cash-flow",
       },
       {
         title: "Account Statement",
         icon: FileText,
-        href: "/dashboard/finance/account-statement",
+        href: "/finance/account-statement",
       },
     ],
   },
@@ -244,14 +242,14 @@ const menuItems: MenuItem[] = [
     title: "Peoples",
     icon: Users,
     children: [
-      { title: "Customers", icon: Users, href: "/dashboard/peoples/customers" },
-      { title: "Billers", icon: Users2, href: "/dashboard/peoples/billers" },
-      { title: "Suppliers", icon: UserPlus, href: "/dashboard/peoples/suppliers" },
-      { title: "Stores", icon: Building2, href: "/dashboard/peoples/stores" },
+      { title: "Customers", icon: Users, href: "/peoples/customers" },
+      { title: "Billers", icon: Users2, href: "/peoples/billers" },
+      { title: "Suppliers", icon: UserPlus, href: "/peoples/suppliers" },
+      { title: "Stores", icon: Building2, href: "/peoples/stores" },
       {
         title: "Warehouses",
         icon: Warehouse,
-        href: "/dashboard/peoples/warehouses",
+        href: "/peoples/warehouses",
       },
     ],
   },
@@ -259,26 +257,26 @@ const menuItems: MenuItem[] = [
     title: "HRM",
     icon: Briefcase,
     children: [
-      { title: "Employees", icon: Users, href: "/dashboard/hrm/employees" },
+      { title: "Employees", icon: Users, href: "/hrm/employees" },
       {
         title: "Departments",
         icon: Building2,
-        href: "/dashboard/hrm/departments",
+        href: "/hrm/departments",
       },
       {
         title: "Designation",
         icon: Briefcase,
-        href: "/dashboard/hrm/designation",
+        href: "/hrm/designation",
       },
-      { title: "Shifts", icon: Calendar, href: "/dashboard/hrm/shifts" },
+      { title: "Shifts", icon: Calendar, href: "/hrm/shifts" },
       {
         title: "Attendence",
         icon: ClipboardList,
-        href: "/dashboard/hrm/attendance",
+        href: "/hrm/attendance",
       },
-      { title: "Leaves", icon: Calendar, href: "/dashboard/hrm/leaves" },
-      { title: "Holidays", icon: Calendar, href: "/dashboard/hrm/holidays" },
-      { title: "Payroll", icon: DollarSign, href: "/dashboard/hrm/payroll" },
+      { title: "Leaves", icon: Calendar, href: "/hrm/leaves" },
+      { title: "Holidays", icon: Calendar, href: "/hrm/holidays" },
+      { title: "Payroll", icon: DollarSign, href: "/hrm/payroll" },
     ],
   },
   {
@@ -288,62 +286,62 @@ const menuItems: MenuItem[] = [
       {
         title: "Sales Report",
         icon: BarChart3,
-        href: "/dashboard/reports/sales-report",
+        href: "/reports/sales-report",
       },
       {
         title: "Purchase Report",
         icon: BarChart3,
-        href: "/dashboard/reports/purchase-report",
+        href: "/reports/purchase-report",
       },
       {
         title: "Inventory Report",
         icon: BarChart3,
-        href: "/dashboard/reports/inventory-report",
+        href: "/reports/inventory-report",
       },
       {
         title: "Invoice Report",
         icon: BarChart3,
-        href: "/dashboard/reports/invoice-report",
+        href: "/reports/invoice-report",
       },
       {
         title: "Supplier Report",
         icon: BarChart3,
-        href: "/dashboard/reports/supplier-report",
+        href: "/reports/supplier-report",
       },
       {
         title: "Customer Report",
         icon: BarChart3,
-        href: "/dashboard/reports/customer-report",
+        href: "/reports/customer-report",
       },
       {
         title: "Product Report",
         icon: BarChart3,
-        href: "/dashboard/reports/product-report",
+        href: "/reports/product-report",
       },
       {
         title: "Expense Report",
         icon: BarChart3,
-        href: "/dashboard/reports/expense-report",
+        href: "/reports/expense-report",
       },
       {
         title: "Income Report",
         icon: BarChart3,
-        href: "/dashboard/reports/income-report",
+        href: "/reports/income-report",
       },
       {
         title: "Tax Report",
         icon: BarChart3,
-        href: "/dashboard/reports/tax-report",
+        href: "/reports/tax-report",
       },
       {
         title: "Profit & Loss",
         icon: BarChart3,
-        href: "/dashboard/reports/profit-loss",
+        href: "/reports/profit-loss",
       },
       {
         title: "Annual Report",
         icon: BarChart3,
-        href: "/dashboard/reports/annual-report",
+        href: "/reports/annual-report",
       },
     ],
   },
@@ -351,16 +349,16 @@ const menuItems: MenuItem[] = [
     title: "User Management",
     icon: UserCog,
     children: [
-      { title: "Users", icon: Users, href: "/dashboard/user-management/users" },
+      { title: "Users", icon: Users, href: "/user-management/users" },
       {
         title: "Roles & Permissions",
         icon: UserCog,
-        href: "/dashboard/user-management/roles-permissions",
+        href: "/user-management/roles-permissions",
       },
       {
         title: "Delete Account Request",
         icon: Delete,
-        href: "/dashboard/user-management/delete-requests",
+        href: "/user-management/delete-requests",
       },
     ],
   },
@@ -368,26 +366,26 @@ const menuItems: MenuItem[] = [
     title: "Content (CMS)",
     icon: BookOpen,
     children: [
-      { title: "Pages", icon: FileText, href: "/dashboard/cms/pages" },
-      { title: "Blog", icon: BookOpen, href: "/dashboard/cms/blog" },
-      { title: "Location", icon: MapPin, href: "/dashboard/cms/location" },
+      { title: "Pages", icon: FileText, href: "/cms/pages" },
+      { title: "Blog", icon: BookOpen, href: "/cms/blog" },
+      { title: "Location", icon: MapPin, href: "/cms/location" },
       {
         title: "Testimonials",
         icon: MessageSquare,
-        href: "/dashboard/cms/testimonials",
+        href: "/cms/testimonials",
       },
-      { title: "FAQ", icon: HelpCircle, href: "/dashboard/cms/faq" },
+      { title: "FAQ", icon: HelpCircle, href: "/cms/faq" },
     ],
   },
   {
     title: "Pages",
     icon: FileText,
     children: [
-      { title: "Profile", icon: Users, href: "/dashboard/pages/profile" },
+      { title: "Profile", icon: Users, href: "/pages/profile" },
       { title: "Authentication", icon: UserCog, href: "/login" },
       { title: "Error Page", icon: FileText, href: "/404" },
-      { title: "Blank Page", icon: FileText, href: "/dashboard/pages/blank" },
-      { title: "Pricing", icon: DollarSign, href: "/dashboard/pages/pricing" },
+      { title: "Blank Page", icon: FileText, href: "/pages/blank" },
+      { title: "Pricing", icon: DollarSign, href: "/pages/pricing" },
       { title: "Coming Soon", icon: FileText, href: "/coming-soon" },
       { title: "Under Maintenance", icon: FileText, href: "/maintenance" },
     ],
@@ -399,32 +397,32 @@ const menuItems: MenuItem[] = [
       {
         title: "General Settings",
         icon: Settings,
-        href: "/dashboard/settings/general",
+        href: "/settings/general",
       },
       {
         title: "Website Settings",
         icon: Settings,
-        href: "/dashboard/settings/website",
+        href: "/settings/website",
       },
       {
         title: "App Settings",
         icon: Settings,
-        href: "/dashboard/settings/app",
+        href: "/settings/app",
       },
       {
         title: "System Settings",
         icon: Settings,
-        href: "/dashboard/settings/system",
+        href: "/settings/system",
       },
       {
         title: "Financial Settings",
         icon: Settings,
-        href: "/dashboard/settings/financial",
+        href: "/settings/financial",
       },
       {
         title: "Other Settings",
         icon: Settings,
-        href: "/dashboard/settings/other",
+        href: "/settings/other",
       },
     ],
   },
@@ -435,8 +433,9 @@ const menuItems: MenuItem[] = [
   },
 ];
 
+
 export default function Sidebar() {
-  const [openMenus, setOpenMenus] = useState<string[]>(["Inventory"]); 
+  const [openMenus, setOpenMenus] = useState<string[]>(["Inventory"]);
   const [collapsed, setCollapsed] = useState(false);
   const pathname = usePathname();
 

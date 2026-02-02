@@ -114,6 +114,7 @@ export default function SuperAdminpage() {
           chartColor="#36B37E"
         />
       </div>
+      {/* Companies, Revenue chart, and Top Plans */}
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
         <div className="">
           <CompaniesCard />
@@ -125,6 +126,8 @@ export default function SuperAdminpage() {
           <TopPlansCard />
         </div>
       </div>
+
+      {/* Recent Activities */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <RecentTransactions />
         <RecentlyRegisteredCard />
