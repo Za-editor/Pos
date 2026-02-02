@@ -30,44 +30,51 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 
-export const brands = [
+export const units = [
   {
-    brand: "Apple",
-    image: "/brands/apple.png",
-    createdDate: "2023-09-15",
+    unit: "Piece",
+    shortName: "Pc",
+    noOfProduct: 320,
+    createdDate: "2023-10-12",
     status: "active",
   },
   {
-    brand: "Samsung",
-    image: "/brands/samsung.png",
-    createdDate: "2023-10-02",
+    unit: "Kilogram",
+    shortName: "Kg",
+    noOfProduct: 180,
+    createdDate: "2023-11-05",
     status: "active",
   },
   {
-    brand: "Lenovo",
-    image: "/brands/lenovo.png",
-    createdDate: "2024-01-08",
-    status: "active",
-  },
-  {
-    brand: "Nike",
-    image: "/brands/nike.png",
-    createdDate: "2023-11-20",
+    unit: "Gram",
+    shortName: "G",
+    noOfProduct: 95,
+    createdDate: "2024-01-18",
     status: "inactive",
   },
   {
-    brand: "Sony",
-    image: "/brands/sony.png",
-    createdDate: "2024-02-14",
+    unit: "Liter",
+    shortName: "L",
+    noOfProduct: 140,
+    createdDate: "2023-09-28",
     status: "active",
   },
   {
-    brand: "Beats",
-    image: "/brands/beats.png",
-    createdDate: "2023-12-05",
+    unit: "Box",
+    shortName: "Box",
+    noOfProduct: 60,
+    createdDate: "2024-02-07",
     status: "inactive",
+  },
+  {
+    unit: "Pack",
+    shortName: "Pk",
+    noOfProduct: 210,
+    createdDate: "2023-12-15",
+    status: "active",
   },
 ];
+
 
 
 
@@ -81,9 +88,9 @@ export default function UnitsPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
-  const totalPages = Math.ceil(brands.length / rowsPerPage);
+  const totalPages = Math.ceil(units.length / rowsPerPage);
 
-  const paginatedProducts = brands.slice(
+  const paginatedProducts = units.slice(
     (currentPage - 1) * rowsPerPage,
     currentPage * rowsPerPage,
   );
@@ -139,6 +146,7 @@ export default function UnitsPage() {
                 <TableHead>Unit</TableHead>
                 <TableHead>Short Name</TableHead>
                 <TableHead>No of Products</TableHead>
+                <TableHead>Created Date</TableHead>
                 <TableHead>Status</TableHead>
                 <TableHead className="text-right"></TableHead>
               </TableRow>
@@ -150,18 +158,9 @@ export default function UnitsPage() {
                   <TableCell>
                     <Checkbox />
                   </TableCell>
-                  <TableCell>{p.brand}</TableCell>
-                  <TableCell className="text-muted-foreground">
-                    <Image
-                      src={p.image}
-                      alt={p.brand}
-                      width={36}
-                      height={36}
-                      className="rounded-md"
-                    />
-                  </TableCell>
-
-
+                  <TableCell>{p.unit}</TableCell>
+                  <TableCell>{p.shortName}</TableCell>
+                  <TableCell>{p.noOfProduct}</TableCell>
 
                   <TableCell>{p.createdDate}</TableCell>
 
