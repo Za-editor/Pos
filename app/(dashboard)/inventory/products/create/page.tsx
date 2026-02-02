@@ -82,7 +82,7 @@ export default function CreateProductPage() {
                  <div>
                    <h1 className="text-2xl font-semibold">Products</h1>
                    <p className="text-sm text-muted-foreground">
-                     Dashboard &gt; Products
+                     Dashboard &gt; Create Products
                    </p>
                  </div>
          
