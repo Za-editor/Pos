@@ -352,7 +352,7 @@ export default function DashboardPage() {
         <TopCustomersCard />
         <TopCategoriesCard />
         <OrderHeatmapChart/>
-        {/* <OrderStatisticsCard/> */}
+
       </div>
     </div>
   );
