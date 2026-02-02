@@ -10,6 +10,7 @@ import {
   RevenueCard,
   TopPlansCard,
 } from "@/components/dashboard/companies-revenue-topplans";
+import { RecentlyRegisteredCard, RecentPlanExpiredCard, RecentTransactions } from "@/components/dashboard/recents";
 
 export default function SuperAdminpage() {
   return (
@@ -123,6 +124,11 @@ export default function SuperAdminpage() {
         <div className="">
           <TopPlansCard />
         </div>
+      </div>
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <RecentTransactions />
+        <RecentlyRegisteredCard />
+        <RecentPlanExpiredCard />
       </div>
     </div>
   );

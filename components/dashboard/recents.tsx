@@ -95,7 +95,7 @@ export const expiredPlans = [
   },
 ];
 
-export function RecentTransactionsCard() {
+export function RecentTransactions() {
   return (
     <Card className="rounded-2xl">
       <CardHeader className="flex flex-row justify-between items-center">
