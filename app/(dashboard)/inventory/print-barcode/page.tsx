@@ -120,7 +120,7 @@ export default function PrintBarcodePage() {
         </div>
 
         {/* Paper Size & Toggles */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-center border-b border-gray-200 pb-2">
           <div>
             <Label className="mb-2">
               Paper Size<span className="text-red-500">*</span>
@@ -144,7 +144,7 @@ export default function PrintBarcodePage() {
         </div>
 
         {/* Actions */}
-        <div className="flex justify-end gap-3 pt-4">
+        <div className="flex justify-end gap-3 ">
           <Button className="bg-orange-500 hover:bg-orange-600 text-white gap-2">
             <Eye className="h-4 w-4" />
             Generate QR Code
