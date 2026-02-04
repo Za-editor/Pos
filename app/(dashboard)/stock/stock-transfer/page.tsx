@@ -21,205 +21,72 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import {
-  Eye,
   Pencil,
   Trash2,
-  ChevronDown,
   RefreshCcw,
   ChevronUp,
 } from "lucide-react";
 import { useState } from "react";
 
-const products = [
+const warehouseTransfers = [
   {
-    sku: "PT001",
-    name: "Lenovo IdeaPad 3",
-    image: "/products/laptop.png",
-    category: "Computers",
-    brand: "Lenovo",
-    price: "$600",
-    unit: "Pc",
-    qty: 100,
-    createdBy: "James Kirwin",
-    avatar: "/users/user1.png",
+    fromWarehouse: "Main Warehouse",
+    toWarehouse: "Secondary Warehouse",
+    noOfProducts: 3,
+    quantityTransferred: 120,
+    referenceNumber: "TRF-0001",
+    date: "2024-12-05",
   },
   {
-    sku: "PT002",
-    name: "Beats Pro",
-    image: "/products/headphone.png",
-    category: "Electronics",
-    brand: "Beats",
-    price: "$160",
-    unit: "Pc",
-    qty: 140,
-    createdBy: "Francis Chang",
-    avatar: "/users/user2.png",
+    fromWarehouse: "Central Warehouse",
+    toWarehouse: "Ikeja Warehouse",
+    noOfProducts: 2,
+    quantityTransferred: 75,
+    referenceNumber: "TRF-0002",
+    date: "2024-12-07",
   },
   {
-    sku: "PT003",
-    name: "Nike Jordan",
-    image: "/products/shoe.png",
-    category: "Shoe",
-    brand: "Nike",
-    price: "$110",
-    unit: "Pc",
-    qty: 300,
-    createdBy: "Antonio Engle",
-    avatar: "/users/user3.png",
+    fromWarehouse: "Lekki Warehouse",
+    toWarehouse: "Abuja Warehouse",
+    noOfProducts: 4,
+    quantityTransferred: 200,
+    referenceNumber: "TRF-0003",
+    date: "2024-12-09",
   },
   {
-    sku: "PT004",
-    name: "Apple Series 5 Watch",
-    image: "/products/watch.png",
-    category: "Electronics",
-    brand: "Apple",
-    price: "$120",
-    unit: "Pc",
-    qty: 450,
-    createdBy: "Leo Kelly",
-    avatar: "/users/user4.png",
+    fromWarehouse: "Main Warehouse",
+    toWarehouse: "Ibadan Warehouse",
+    noOfProducts: 1,
+    quantityTransferred: 40,
+    referenceNumber: "TRF-0004",
+    date: "2024-12-11",
   },
   {
-    sku: "PT005",
-    name: "Amazon Echo Dot",
-    image: "/products/echo.png",
-    category: "Electronics",
-    brand: "Amazon",
-    price: "$80",
-    unit: "Pc",
-    qty: 320,
-    createdBy: "Annette Walker",
-    avatar: "/users/user5.png",
+    fromWarehouse: "Secondary Warehouse",
+    toWarehouse: "Yaba Warehouse",
+    noOfProducts: 3,
+    quantityTransferred: 95,
+    referenceNumber: "TRF-0005",
+    date: "2024-12-14",
   },
   {
-    sku: "PT001",
-    name: "Lenovo IdeaPad 3",
-    image: "/products/laptop.png",
-    category: "Computers",
-    brand: "Lenovo",
-    price: "$600",
-    unit: "Pc",
-    qty: 100,
-    createdBy: "James Kirwin",
-    avatar: "/users/user1.png",
-  },
-  {
-    sku: "PT002",
-    name: "Beats Pro",
-    image: "/products/headphone.png",
-    category: "Electronics",
-    brand: "Beats",
-    price: "$160",
-    unit: "Pc",
-    qty: 140,
-    createdBy: "Francis Chang",
-    avatar: "/users/user2.png",
-  },
-  {
-    sku: "PT003",
-    name: "Nike Jordan",
-    image: "/products/shoe.png",
-    category: "Shoe",
-    brand: "Nike",
-    price: "$110",
-    unit: "Pc",
-    qty: 300,
-    createdBy: "Antonio Engle",
-    avatar: "/users/user3.png",
-  },
-  {
-    sku: "PT004",
-    name: "Apple Series 5 Watch",
-    image: "/products/watch.png",
-    category: "Electronics",
-    brand: "Apple",
-    price: "$120",
-    unit: "Pc",
-    qty: 450,
-    createdBy: "Leo Kelly",
-    avatar: "/users/user4.png",
-  },
-  {
-    sku: "PT005",
-    name: "Amazon Echo Dot",
-    image: "/products/echo.png",
-    category: "Electronics",
-    brand: "Amazon",
-    price: "$80",
-    unit: "Pc",
-    qty: 320,
-    createdBy: "Annette Walker",
-    avatar: "/users/user5.png",
-  },
-  {
-    sku: "PT001",
-    name: "Lenovo IdeaPad 3",
-    image: "/products/laptop.png",
-    category: "Computers",
-    brand: "Lenovo",
-    price: "$600",
-    unit: "Pc",
-    qty: 100,
-    createdBy: "James Kirwin",
-    avatar: "/users/user1.png",
-  },
-  {
-    sku: "PT002",
-    name: "Beats Pro",
-    image: "/products/headphone.png",
-    category: "Electronics",
-    brand: "Beats",
-    price: "$160",
-    unit: "Pc",
-    qty: 140,
-    createdBy: "Francis Chang",
-    avatar: "/users/user2.png",
-  },
-  {
-    sku: "PT003",
-    name: "Nike Jordan",
-    image: "/products/shoe.png",
-    category: "Shoe",
-    brand: "Nike",
-    price: "$110",
-    unit: "Pc",
-    qty: 300,
-    createdBy: "Antonio Engle",
-    avatar: "/users/user3.png",
-  },
-  {
-    sku: "PT004",
-    name: "Apple Series 5 Watch",
-    image: "/products/watch.png",
-    category: "Electronics",
-    brand: "Apple",
-    price: "$120",
-    unit: "Pc",
-    qty: 450,
-    createdBy: "Leo Kelly",
-    avatar: "/users/user4.png",
-  },
-  {
-    sku: "PT005",
-    name: "Amazon Echo Dot",
-    image: "/products/echo.png",
-    category: "Electronics",
-    brand: "Amazon",
-    price: "$80",
-    unit: "Pc",
-    qty: 320,
-    createdBy: "Annette Walker",
-    avatar: "/users/user5.png",
+    fromWarehouse: "Central Warehouse",
+    toWarehouse: "VI Warehouse",
+    noOfProducts: 5,
+    quantityTransferred: 260,
+    referenceNumber: "TRF-0006",
+    date: "2024-12-16",
   },
 ];
+
 
 export default function StockTransferPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
-  const totalPages = Math.ceil(products.length / rowsPerPage);
+  const totalPages = Math.ceil(warehouseTransfers.length / rowsPerPage);
 
-  const paginatedProducts = products.slice(
+  const paginatedProducts = warehouseTransfers.slice(
     (currentPage - 1) * rowsPerPage,
     currentPage * rowsPerPage,
   );
@@ -273,7 +140,7 @@ export default function StockTransferPage() {
                 <TableHead>From Warehouse</TableHead>
                 <TableHead>To Warehouse</TableHead>
                 <TableHead>No of Products</TableHead>
-                <TableHead>Quantity Transfered</TableHead>
+                <TableHead>Quantity Transferred</TableHead>
                 <TableHead>Reference Number</TableHead>
                 <TableHead>Date</TableHead>
                 <TableHead className="text-right"></TableHead>
@@ -287,46 +154,22 @@ export default function StockTransferPage() {
                     <Checkbox />
                   </TableCell>
                   <TableCell className="text-muted-foreground">
-                    {p.sku}
+                    {p.fromWarehouse}
                   </TableCell>
 
-                  <TableCell>
-                    <div className="flex items-center gap-3">
-                      <Image
-                        src={p.image}
-                        alt={p.name}
-                        width={36}
-                        height={36}
-                        className="rounded-md"
-                      />
-                      <span className="font-medium">{p.name}</span>
-                    </div>
-                  </TableCell>
 
-                  <TableCell>{p.category}</TableCell>
-                  <TableCell>{p.brand}</TableCell>
-                  <TableCell>{p.price}</TableCell>
-                  <TableCell>{p.unit}</TableCell>
-                  <TableCell>{p.qty}</TableCell>
 
-                  <TableCell>
-                    <div className="flex items-center gap-2">
-                      {/* <Image
-                        src={p.avatar}
-                        alt={p.createdBy}
-                        width={28}
-                        height={28}
-                        className="rounded-full"
-                      /> */}
-                      <span className="text-sm">{p.createdBy}</span>
-                    </div>
-                  </TableCell>
+                  <TableCell>{p.toWarehouse}</TableCell>
+                  <TableCell>{p.noOfProducts}</TableCell>
+                  <TableCell>{p.quantityTransferred}</TableCell>
+                  <TableCell>{p.referenceNumber}</TableCell>
+                  <TableCell>{p.date}</TableCell>
+
+
 
                   <TableCell className="text-right">
                     <div className="flex justify-end gap-2">
-                      <Button size="icon" variant="outline">
-                        <Eye className="h-4 w-4" />
-                      </Button>
+
                       <Button size="icon" variant="outline">
                         <Pencil className="h-4 w-4" />
                       </Button>
