@@ -21,12 +21,13 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import {
-  Eye,
+
   Pencil,
   Trash2,
   ChevronDown,
   RefreshCcw,
   ChevronUp,
+
 } from "lucide-react";
 import { useState } from "react";
 
@@ -195,9 +196,7 @@ export default function ManageStockPage() {
 
                   <TableCell className="text-right">
                     <div className="flex justify-end gap-2">
-                      <Button size="icon" variant="outline">
-                        <Eye className="h-4 w-4" />
-                      </Button>
+
                       <Button size="icon" variant="outline">
                         <Pencil className="h-4 w-4" />
                       </Button>
