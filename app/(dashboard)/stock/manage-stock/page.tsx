@@ -30,186 +30,62 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 
-const products = [
+const warehouseProducts = [
   {
-    sku: "PT001",
-    name: "Lenovo IdeaPad 3",
-    image: "/products/laptop.png",
-    category: "Computers",
-    brand: "Lenovo",
-    price: "$600",
-    unit: "Pc",
-    qty: 100,
-    createdBy: "James Kirwin",
-    avatar: "/users/user1.png",
+    warehouse: "Main Warehouse",
+    store: "Ikeja Store",
+    productName: "Lenovo IdeaPad 3",
+    date: "2024-12-10",
+    person: "James Kirwin",
+    qty: 45,
   },
   {
-    sku: "PT002",
-    name: "Beats Pro",
-    image: "/products/headphone.png",
-    category: "Electronics",
-    brand: "Beats",
-    price: "$160",
-    unit: "Pc",
-    qty: 140,
-    createdBy: "Francis Chang",
-    avatar: "/users/user2.png",
+    warehouse: "Main Warehouse",
+    store: "Lekki Store",
+    productName: "Beats Pro",
+    date: "2024-12-11",
+    person: "Francis Chang",
+    qty: 30,
   },
   {
-    sku: "PT003",
-    name: "Nike Jordan",
-    image: "/products/shoe.png",
-    category: "Shoe",
-    brand: "Nike",
-    price: "$110",
-    unit: "Pc",
-    qty: 300,
-    createdBy: "Antonio Engle",
-    avatar: "/users/user3.png",
+    warehouse: "Secondary Warehouse",
+    store: "Abuja Store",
+    productName: "Nike Jordan",
+    date: "2024-12-12",
+    person: "Antonio Engle",
+    qty: 60,
   },
   {
-    sku: "PT004",
-    name: "Apple Series 5 Watch",
-    image: "/products/watch.png",
-    category: "Electronics",
-    brand: "Apple",
-    price: "$120",
-    unit: "Pc",
-    qty: 450,
-    createdBy: "Leo Kelly",
-    avatar: "/users/user4.png",
+    warehouse: "Secondary Warehouse",
+    store: "Ibadan Store",
+    productName: "Apple Series 5 Watch",
+    date: "2024-12-13",
+    person: "Leo Kelly",
+    qty: 25,
   },
   {
-    sku: "PT005",
-    name: "Amazon Echo Dot",
-    image: "/products/echo.png",
-    category: "Electronics",
-    brand: "Amazon",
-    price: "$80",
-    unit: "Pc",
-    qty: 320,
-    createdBy: "Annette Walker",
-    avatar: "/users/user5.png",
+    warehouse: "Main Warehouse",
+    store: "Yaba Store",
+    productName: "Amazon Echo Dot",
+    date: "2024-12-14",
+    person: "Annette Walker",
+    qty: 40,
   },
   {
-    sku: "PT001",
-    name: "Lenovo IdeaPad 3",
-    image: "/products/laptop.png",
-    category: "Computers",
-    brand: "Lenovo",
-    price: "$600",
-    unit: "Pc",
-    qty: 100,
-    createdBy: "James Kirwin",
-    avatar: "/users/user1.png",
+    warehouse: "Central Warehouse",
+    store: "Surulere Store",
+    productName: "Lenovo IdeaPad 3",
+    date: "2024-12-15",
+    person: "James Kirwin",
+    qty: 20,
   },
   {
-    sku: "PT002",
-    name: "Beats Pro",
-    image: "/products/headphone.png",
-    category: "Electronics",
-    brand: "Beats",
-    price: "$160",
-    unit: "Pc",
-    qty: 140,
-    createdBy: "Francis Chang",
-    avatar: "/users/user2.png",
-  },
-  {
-    sku: "PT003",
-    name: "Nike Jordan",
-    image: "/products/shoe.png",
-    category: "Shoe",
-    brand: "Nike",
-    price: "$110",
-    unit: "Pc",
-    qty: 300,
-    createdBy: "Antonio Engle",
-    avatar: "/users/user3.png",
-  },
-  {
-    sku: "PT004",
-    name: "Apple Series 5 Watch",
-    image: "/products/watch.png",
-    category: "Electronics",
-    brand: "Apple",
-    price: "$120",
-    unit: "Pc",
-    qty: 450,
-    createdBy: "Leo Kelly",
-    avatar: "/users/user4.png",
-  },
-  {
-    sku: "PT005",
-    name: "Amazon Echo Dot",
-    image: "/products/echo.png",
-    category: "Electronics",
-    brand: "Amazon",
-    price: "$80",
-    unit: "Pc",
-    qty: 320,
-    createdBy: "Annette Walker",
-    avatar: "/users/user5.png",
-  },
-  {
-    sku: "PT001",
-    name: "Lenovo IdeaPad 3",
-    image: "/products/laptop.png",
-    category: "Computers",
-    brand: "Lenovo",
-    price: "$600",
-    unit: "Pc",
-    qty: 100,
-    createdBy: "James Kirwin",
-    avatar: "/users/user1.png",
-  },
-  {
-    sku: "PT002",
-    name: "Beats Pro",
-    image: "/products/headphone.png",
-    category: "Electronics",
-    brand: "Beats",
-    price: "$160",
-    unit: "Pc",
-    qty: 140,
-    createdBy: "Francis Chang",
-    avatar: "/users/user2.png",
-  },
-  {
-    sku: "PT003",
-    name: "Nike Jordan",
-    image: "/products/shoe.png",
-    category: "Shoe",
-    brand: "Nike",
-    price: "$110",
-    unit: "Pc",
-    qty: 300,
-    createdBy: "Antonio Engle",
-    avatar: "/users/user3.png",
-  },
-  {
-    sku: "PT004",
-    name: "Apple Series 5 Watch",
-    image: "/products/watch.png",
-    category: "Electronics",
-    brand: "Apple",
-    price: "$120",
-    unit: "Pc",
-    qty: 450,
-    createdBy: "Leo Kelly",
-    avatar: "/users/user4.png",
-  },
-  {
-    sku: "PT005",
-    name: "Amazon Echo Dot",
-    image: "/products/echo.png",
-    category: "Electronics",
-    brand: "Amazon",
-    price: "$80",
-    unit: "Pc",
-    qty: 320,
-    createdBy: "Annette Walker",
-    avatar: "/users/user5.png",
+    warehouse: "Central Warehouse",
+    store: "VI Store",
+    productName: "Beats Pro",
+    date: "2024-12-16",
+    person: "Francis Chang",
+    qty: 35,
   },
 ];
 
@@ -217,9 +93,9 @@ export default function ManageStockPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
-  const totalPages = Math.ceil(products.length / rowsPerPage);
+  const totalPages = Math.ceil(warehouseProducts.length / rowsPerPage);
 
-  const paginatedProducts = products.slice(
+  const paginatedProducts = warehouseProducts.slice(
     (currentPage - 1) * rowsPerPage,
     currentPage * rowsPerPage,
   );
@@ -295,40 +171,27 @@ export default function ManageStockPage() {
                     <Checkbox />
                   </TableCell>
                   <TableCell className="text-muted-foreground">
-                    {p.sku}
+                    {p.warehouse}
                   </TableCell>
+                  <TableCell>{p.store}</TableCell>
 
                   <TableCell>
                     <div className="flex items-center gap-3">
-                      <Image
+                      {/* <Image
                         src={p.image}
                         alt={p.name}
                         width={36}
                         height={36}
                         className="rounded-md"
-                      />
-                      <span className="font-medium">{p.name}</span>
+                      /> */}
+                      <span className="font-medium">{p.productName}</span>
                     </div>
                   </TableCell>
 
-                  <TableCell>{p.category}</TableCell>
-                  <TableCell>{p.brand}</TableCell>
-                  <TableCell>{p.price}</TableCell>
-                  <TableCell>{p.unit}</TableCell>
+                  <TableCell>{p.date}</TableCell>
+                  <TableCell>{p.person}</TableCell>
                   <TableCell>{p.qty}</TableCell>
 
-                  <TableCell>
-                    <div className="flex items-center gap-2">
-                      {/* <Image
-                        src={p.avatar}
-                        alt={p.createdBy}
-                        width={28}
-                        height={28}
-                        className="rounded-full"
-                      /> */}
-                      <span className="text-sm">{p.createdBy}</span>
-                    </div>
-                  </TableCell>
 
                   <TableCell className="text-right">
                     <div className="flex justify-end gap-2">
