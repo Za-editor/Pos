@@ -150,7 +150,7 @@ export default function PurchaseReportPage() {
           </div>
 
           {/* Button */}
-          <Button className="bg-orange-500 hover:bg-orange-600 text-white text-sm px-5 py-2 rounded-lg ml-auto w-125">
+          <Button className="bg-orange-500 hover:bg-orange-600 text-white text-sm px-5 py-2 rounded-lg ml-auto w-40">
             Generate Report
           </Button>
         </div>
