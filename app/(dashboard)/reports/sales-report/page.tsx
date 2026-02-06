@@ -118,7 +118,7 @@ const stats = [
 
 
 
-export default function CustomersPage() {
+export default function SalesReportPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
