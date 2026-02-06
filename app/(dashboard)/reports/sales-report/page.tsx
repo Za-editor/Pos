@@ -206,9 +206,9 @@ export default function SalesReportPage() {
           </div>
 
           {/* Button */}
-          <button className="bg-orange-500 hover:bg-orange-600 text-white text-sm px-5 py-2 rounded-lg ml-auto w-125">
+          <Button className="bg-orange-500 hover:bg-orange-600 text-white text-sm px-5 py-2 rounded-lg ml-auto w-125">
             Generate Report
-          </button>
+          </Button>
         </div>
       </div>
       {/* Table */}
