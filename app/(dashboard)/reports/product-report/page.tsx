@@ -239,7 +239,6 @@ export default function ProductReportPage() {
                 <TableRow key={i}>
                   
                   <TableCell>{p.sku}</TableCell>
-                 
                   <TableCell>{p.productName}</TableCell>
                   <TableCell>{p.category}</TableCell>
                   <TableCell>{p.brand}</TableCell>
