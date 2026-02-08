@@ -1,5 +1,5 @@
-import { AlertTriangle, Calendar, ShoppingCart } from "lucide-react";
-import Image from "next/image";
+import {  Calendar, ShoppingCart } from "lucide-react";
+
 import { Card, CardHeader, CardTitle, CardContent } from "../ui/card";
 import { Button } from "../ui/button";
 
