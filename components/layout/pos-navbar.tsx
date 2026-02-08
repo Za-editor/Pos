@@ -68,7 +68,12 @@ export default function PosNavbar({ user }: NavbarProps) {
     <header className="h-16 bg-white border-b border-gray-200 px-5 flex items-center justify-between sticky top-0 z-40">
       {/* LEFT */}
       <div className="flex items-center gap-4">
-        <Image src="/logo.png" alt="Dreams POS" width={110} height={32} />
+        <Image
+          src="/images/logo/logo.png"
+          alt="Dreams POS"
+          width={110}
+          height={32}
+        />
 
         <div className="bg-emerald-500 text-white text-xs px-3 py-1.5 rounded-md font-semibold">
           09:25:32
