@@ -35,7 +35,7 @@ const categories = [
 
 export default function CategorySidebar() {
   return (
-    <aside className="w-28 bg-white border-r border-gray-200 py-4 flex flex-col items-center gap-3 h-full">
+    <aside className="w-28 bg-white border-r border-gray-200 py-4 flex flex-col items-center gap-3 h-screen">
       {categories.map((cat, idx) => (
         <button
           key={idx}
