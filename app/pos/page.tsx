@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 
 
 import PosNavbar from "@/components/layout/pos-navbar";
+import CategorySidebar from "@/components/pos/category-sidebar";
 
 
 export default async function Pos() {
@@ -15,12 +16,14 @@ export default async function Pos() {
   console.log("User authenticated, rendering dashboard");
 
   return (
-    <div className="flex h-screen bg-gray-50">
+    <div className="h-screen bg-gray-50">
 
-      <div className="flex-1 flex flex-col overflow-hidden ">
+
           {/* Navbar */}
-              <PosNavbar user={user} /> 
-  
+              <PosNavbar user={user} />
+ 
+      <div className="flex">
+        <CategorySidebar/>
       </div>
     </div>
   );
