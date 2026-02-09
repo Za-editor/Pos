@@ -3,17 +3,23 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import {
-  Bell,
+
   User,
   LogOut,
   Settings,
   ChevronDown,
   Loader2,
   ShoppingBag,
-  Plus,
-  Laptop2,
+
   Maximize,
-  Mail,
+
+  Calculator,
+
+  Banknote,
+  Printer,
+  CircleEllipsis,
+  ChartNoAxesColumn,
+
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -67,7 +73,7 @@ export default function PosNavbar({ user }: NavbarProps) {
   return (
     <header className="h-16 bg-white border-b border-gray-200 px-5 flex items-center justify-between sticky top-0 z-40">
       {/* LEFT */}
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-6">
         <Image
           src="/images/logo/logo.png"
           alt="Dreams POS"
@@ -80,10 +86,12 @@ export default function PosNavbar({ user }: NavbarProps) {
         </div>
       </div>
 
-      {/* CENTER */}
+      {/* RIGHT */}
       <div className="flex items-center gap-3">
         <Button className="bg-indigo-600 hover:bg-indigo-700 text-white h-9 px-4 rounded-md text-sm">
-          Dashboard
+          <Link href="/dashboard" className="flex items-center gap-1">
+            Dashboard
+          </Link>
         </Button>
 
         <div className="flex items-center gap-2 border border-gray-200 px-3 h-9 rounded-md text-sm cursor-pointer">
@@ -91,32 +99,22 @@ export default function PosNavbar({ user }: NavbarProps) {
           <span className="font-medium">Freshmart</span>
           <ChevronDown className="h-3 w-3 text-gray-400" />
         </div>
-      </div>
-
-      {/* RIGHT */}
-      <div className="flex items-center gap-3">
         {/* Add / POS Buttons */}
         <Button className="bg-orange-500 hover:bg-orange-600 text-white h-9 px-3 rounded-md">
-          <Plus className="h-4 w-4" />
+          <Calculator className="h-4 w-4" />
         </Button>
 
-        <Button className="bg-slate-900 hover:bg-slate-800 text-white h-9 px-3 rounded-md">
-          <Laptop2 className="h-4 w-4" />
-        </Button>
+
 
         {/* ICON GROUP */}
         <div className="flex items-center gap-2 pl-3 border-l">
           {[
-            <Image
-              key="flag"
-              src="/images/usa.png"
-              alt=""
-              width={20}
-              height={20}
-            />,
+
             <Maximize key="max" className="h-4 w-4" />,
-            <Mail key="mail" className="h-4 w-4" />,
-            <Bell key="bell" className="h-4 w-4" />,
+            <Banknote key="bank" className="h-4 w-4" />,
+            <Printer key="bell" className="h-4 w-4" />,
+            <CircleEllipsis key="set" className="h-4 w-4" />,
+            <ChartNoAxesColumn key="set" className="h-4 w-4" />,
             <Settings key="set" className="h-4 w-4" />,
           ].map((icon, i) => (
             <div

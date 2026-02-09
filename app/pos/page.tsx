@@ -17,12 +17,10 @@ export default async function Pos() {
   return (
     <div className="flex h-screen bg-gray-50">
 
-      <div className="flex-1 flex flex-col overflow-hidden">
-              {/* Navbar */}
+      <div className="flex-1 flex flex-col overflow-hidden ">
+          {/* Navbar */}
               <PosNavbar user={user} /> 
-     
-
-
+  
       </div>
     </div>
   );

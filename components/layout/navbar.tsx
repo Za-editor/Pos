@@ -100,7 +100,7 @@ export default function Navbar({ user }: NavbarProps) {
           className="bg-[#FE9F43] hover:bg-[#f09a42] text-white h-10 px-4 rounded-lg shadow-sm shadow-orange-100 transition-all active:scale-95"
         >
           <Link
-            href="/dashboard/sales/pos"
+            href="/inventory/products/create"
             className="flex items-center gap-2 font-bold text-xs uppercase tracking-wider"
           >
             <Plus className="h-4 w-4 stroke-[3px]" />
@@ -112,7 +112,7 @@ export default function Navbar({ user }: NavbarProps) {
           className="bg-[#092C4C] hover:bg-[#17426B] text-white h-10 px-4 rounded-lg transition-all active:scale-95"
         >
           <Link
-            href="/dashboard/sales/pos"
+            href="/pos"
             className="flex items-center gap-2 font-bold text-xs uppercase tracking-wider"
           >
             <Laptop2 className="h-4 w-4 stroke-[3px]" />
