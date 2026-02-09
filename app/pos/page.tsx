@@ -4,6 +4,9 @@ import { redirect } from "next/navigation";
 import PosNavbar from "@/components/layout/pos-navbar";
 import CategorySidebar from "@/components/pos/category-sidebar";
 import PosFooter from "@/components/pos/pos-footer";
+import PosProducts from "@/components/pos/product-grid";
+import OrderList from "@/components/pos/shopping-cart";
+import SelectPayment from "@/components/pos/payment-interface";
 
 export default async function Pos() {
   const { user } = await getCurrentUser();
@@ -19,6 +22,11 @@ export default async function Pos() {
       {/* Main Content */}
       <div className="flex flex-1 overflow-hidden">
         <CategorySidebar />
+        <PosProducts />
+        <div className="flex flex-col gap-4 p-4 w-120">
+          <OrderList />
+          <SelectPayment/>
+        </div>
         
       </div>
 
