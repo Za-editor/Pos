@@ -59,6 +59,7 @@ interface MenuItem {
   href?: string;
   badge?: string;
   children?: MenuItem[];
+  disabled?: boolean;
 }
 
 const menuItems: MenuItem[] = [
@@ -345,6 +346,7 @@ const menuItems: MenuItem[] = [
       { title: "Holidays", icon: Calendar, href: "/hrm/holidays" },
       { title: "Payroll", icon: DollarSign, href: "/hrm/payroll" },
     ],
+    disabled: true,
   },
 
   {
@@ -363,6 +365,7 @@ const menuItems: MenuItem[] = [
         href: "/user-management/delete-requests",
       },
     ],
+    disabled: true
   },
   {
     title: "Content (CMS)",
@@ -378,6 +381,7 @@ const menuItems: MenuItem[] = [
       },
       { title: "FAQ", icon: HelpCircle, href: "/cms/faq" },
     ],
+    disabled: true
   },
   {
     title: "Pages",
@@ -391,6 +395,7 @@ const menuItems: MenuItem[] = [
       { title: "Coming Soon", icon: FileText, href: "/coming-soon" },
       { title: "Under Maintenance", icon: FileText, href: "/maintenance" },
     ],
+    disabled: true,
   },
   {
     title: "Settings",
@@ -427,6 +432,7 @@ const menuItems: MenuItem[] = [
         href: "/settings/other",
       },
     ],
+    disabled: true,
   },
   {
     title: "Logout",
@@ -434,7 +440,6 @@ const menuItems: MenuItem[] = [
     href: "/api/auth/logout",
   },
 ];
-
 
 export default function Sidebar() {
   const [openMenus, setOpenMenus] = useState<string[]>(["Inventory"]);
@@ -500,12 +505,17 @@ export default function Sidebar() {
               {item.children ? (
                 <div>
                   <button
-                    onClick={() => toggleMenu(item.title)}
+                    disabled={item.disabled}
+                    onClick={() => {
+                      if (!item.disabled) toggleMenu(item.title);
+                    }}
                     className={cn(
                       "w-full flex items-center justify-between px-3 py-2.5 rounded-md text-[13px] font-medium transition-colors",
-                      isParentActive(item.children)
-                        ? "bg-orange-50 text-[#FE9F43]"
-                        : "text-gray-700 hover:bg-gray-50",
+                      item.disabled
+                        ? "opacity-40 cursor-not-allowed text-gray-400"
+                        : isParentActive(item.children)
+                          ? "bg-orange-50 text-[#FE9F43]"
+                          : "text-gray-700 hover:bg-gray-50",
                     )}
                   >
                     <div className="flex items-center gap-3">
@@ -525,25 +535,27 @@ export default function Sidebar() {
                   </button>
 
                   {/* Submenu */}
-                  {openMenus.includes(item.title) && !collapsed && (
-                    <div className="ml-6 mt-1 space-y-0.5 border-l border-gray-200 pl-2">
-                      {item.children.map((child) => (
-                        <Link
-                          key={child.title}
-                          href={child.href || "#"}
-                          className={cn(
-                            "flex items-center gap-3 px-3 py-2 rounded-md text-[13px] transition-colors",
-                            isActive(child.href || "")
-                              ? "bg-orange-50 text-[#FE9F43] font-medium"
-                              : "text-gray-600 hover:bg-gray-50 hover:text-gray-900",
-                          )}
-                        >
-                          <child.icon className="h-4.5 w-4.5 shrink-0 opacity-60" />
-                          <span>{child.title}</span>
-                        </Link>
-                      ))}
-                    </div>
-                  )}
+                  {!item.disabled &&
+                    openMenus.includes(item.title) &&
+                    !collapsed && (
+                      <div className="ml-6 mt-1 space-y-0.5 border-l border-gray-200 pl-2">
+                        {item.children.map((child) => (
+                          <Link
+                            key={child.title}
+                            href={child.href || "#"}
+                            className={cn(
+                              "flex items-center gap-3 px-3 py-2 rounded-md text-[13px] transition-colors",
+                              isActive(child.href || "")
+                                ? "bg-orange-50 text-[#FE9F43] font-medium"
+                                : "text-gray-600 hover:bg-gray-50 hover:text-gray-900",
+                            )}
+                          >
+                            <child.icon className="h-4.5 w-4.5 shrink-0 opacity-60" />
+                            <span>{child.title}</span>
+                          </Link>
+                        ))}
+                      </div>
+                    )}
                 </div>
               ) : (
                 <Link
