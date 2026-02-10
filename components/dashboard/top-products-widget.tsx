@@ -10,7 +10,7 @@ const topSelling = [
     sales: 247,
     change: "↑ 25%",
     trend: "up",
-    img: "/img/1.png",
+    img: "/images/chargerCable.png",
   },
   {
     name: "Yves Saint Eau De Parfum",
@@ -18,7 +18,7 @@ const topSelling = [
     sales: 289,
     change: "↑ 25%",
     trend: "up",
-    img: "/img/2.png",
+    img: "/images/YvesSaint.png",
   },
   {
     name: "Apple Airpods 2",
@@ -26,7 +26,7 @@ const topSelling = [
     sales: 300,
     change: "↑ 25%",
     trend: "up",
-    img: "/img/3.png",
+    img: "/images/Airpods2.png",
   },
   {
     name: "Vacuum Cleaner",
@@ -34,7 +34,7 @@ const topSelling = [
     sales: 225,
     change: "↓ 21%",
     trend: "down",
-    img: "/img/4.png",
+    img: "/images/vacuumCleaner.png",
   },
   {
     name: "Samsung Galaxy S21 Fe 5g",
@@ -42,7 +42,7 @@ const topSelling = [
     sales: 365,
     change: "↑ 25%",
     trend: "up",
-    img: "/img/5.png",
+    img: "/images/samsungGalaxy.png",
   },
 ];
 
@@ -68,7 +68,14 @@ export function TopSellingProducts() {
             className="flex items-center justify-between border-b border-gray-200 pb-2"
           >
             <div className="flex gap-3 items-center">
-              {/* <Image src={item.img} alt={item.name} className="h-10 w-10 rounded-lg" /> */}
+              <Image
+                src={item.img}
+                alt={item.name}
+                width={40}
+                height={40}
+                className="object-contain rounded-lg"
+              />
+
               <div>
                 <p className="text-sm font-medium">{item.name}</p>
                 <p className="text-xs text-gray-500">

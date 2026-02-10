@@ -5,21 +5,31 @@ import { Button,  } from "../ui/button";
 
 
 const lowStock = [
-  { name: "Vacuum Cleaner Robot", id: "#940004", stock: 21, img: "/img/a.png" },
-  { name: "Dell XPS 13", id: "#665814", stock: 8, img: "/img/b.png" },
+  {
+    name: "Vacuum Cleaner Robot",
+    id: "#940004",
+    stock: 21,
+    img: "/images/vacuumCleanerRobot.png",
+  },
+  {
+    name: "Dell XPS 13",
+    id: "#665814",
+    stock: 8,
+    img: "/images/dellXps.png",
+  },
   {
     name: "KitchenAid Stand Mixer",
     id: "#325569",
     stock: 14,
-    img: "/img/c.png",
+    img: "/images/kitchenAid.png",
   },
   {
     name: "Levi's Trucker Jacket",
     id: "#124588",
     stock: 12,
-    img: "/img/d.png",
+    img: "/images/levisTrainer.png",
   },
-  { name: "Lay's Classic", id: "#365586", stock: 10, img: "/img/e.png" },
+  { name: "Lay's Classic", id: "#365586", stock: 10, img: "/images/laysClassic.png" },
 ];
 export function LowStockProducts() {
   return (
@@ -43,7 +53,13 @@ export function LowStockProducts() {
             className="flex items-center justify-between border-b border-gray-200 pb-2"
           >
             <div className="flex gap-3 items-center">
-              {/* <Image src={item.img} alt={item.name} className="h-10 w-10 rounded-lg" /> */}
+                            <Image
+                              src={item.img}
+                              alt={item.name}
+                              width={40}
+                              height={40}
+                              className="object-contain rounded-lg"
+                            />
               <div>
                 <p className="text-sm font-medium">{item.name}</p>
                 <p className="text-xs text-gray-500">ID : {item.id}</p>

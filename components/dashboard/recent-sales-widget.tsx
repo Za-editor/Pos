@@ -2,6 +2,7 @@ import {  Calendar, ShoppingCart } from "lucide-react";
 
 import { Card, CardHeader, CardTitle, CardContent } from "../ui/card";
 import { Button } from "../ui/button";
+import Image from "next/image";
 
 
 const recentSales = [
@@ -12,7 +13,7 @@ const recentSales = [
     status: "Processing",
     statusColor: "bg-indigo-600",
     date: "Today",
-    img: "/img/r1.png",
+    img: "/images/appleSeries9.png",
   },
   {
     name: "Gold Bracelet",
@@ -21,7 +22,7 @@ const recentSales = [
     status: "Cancelled",
     statusColor: "bg-red-600",
     date: "Today",
-    img: "/img/r2.png",
+    img: "/images/goldBracelet.png",
   },
   {
     name: "Parachute Down Duvet",
@@ -30,7 +31,7 @@ const recentSales = [
     status: "Onhold",
     statusColor: "bg-cyan-600",
     date: "15 Jan 2025",
-    img: "/img/r3.png",
+    img: "/images/parachuteDuvet.png",
   },
   {
     name: "YETI Rambler Tumbler",
@@ -39,7 +40,7 @@ const recentSales = [
     status: "Processing",
     statusColor: "bg-indigo-600",
     date: "12 Jan 2025",
-    img: "/img/r4.png",
+    img: "/images/yetiRumbler.png",
   },
   {
     name: "Osmo Genius Starter Kit",
@@ -48,7 +49,7 @@ const recentSales = [
     status: "Completed",
     statusColor: "bg-emerald-600",
     date: "11 Jan 2025",
-    img: "/img/r5.png",
+    img: "/images/osmoGenius.png",
   },
 ];
 export function RecentSales() {
@@ -73,7 +74,13 @@ export function RecentSales() {
             className="flex items-center justify-between border-b border-gray-200 pb-2"
           >
             <div className="flex gap-3 items-center">
-              {/* <Image src={item.img} alt={item.name} className="h-10 w-10 rounded-lg" /> */}
+              <Image
+                src={item.img}
+                alt={item.name}
+                width={40}
+                height={40}
+                className="object-contain rounded-lg"
+              />
               <div>
                 <p className="text-sm font-medium">{item.name}</p>
                 <p className="text-xs text-gray-500">
