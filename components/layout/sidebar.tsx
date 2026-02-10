@@ -148,11 +148,92 @@ const menuItems: MenuItem[] = [
     ],
   },
   {
+    title: "Peoples",
+    icon: Users,
+    children: [
+      { title: "Customers", icon: Users, href: "/peoples/customers" },
+      { title: "Billers", icon: Users2, href: "/peoples/billers" },
+      { title: "Suppliers", icon: UserPlus, href: "/peoples/suppliers" },
+      { title: "Stores", icon: Building2, href: "/peoples/stores" },
+      {
+        title: "Warehouses",
+        icon: Warehouse,
+        href: "/peoples/warehouses",
+      },
+    ],
+  },
+  {
+    title: "Reports",
+    icon: BarChart3,
+    children: [
+      {
+        title: "Sales Report",
+        icon: BarChart3,
+        href: "/reports/sales-report",
+      },
+      {
+        title: "Purchase Report",
+        icon: BarChart3,
+        href: "/reports/purchase-report",
+      },
+      {
+        title: "Inventory Report",
+        icon: BarChart3,
+        href: "/reports/inventory-report",
+      },
+      {
+        title: "Invoice Report",
+        icon: BarChart3,
+        href: "/reports/invoice-report",
+      },
+      {
+        title: "Supplier Report",
+        icon: BarChart3,
+        href: "/reports/supplier-report",
+      },
+      {
+        title: "Customer Report",
+        icon: BarChart3,
+        href: "/reports/customer-report",
+      },
+      {
+        title: "Product Report",
+        icon: BarChart3,
+        href: "/reports/product-report",
+      },
+      {
+        title: "Expense Report",
+        icon: BarChart3,
+        href: "/reports/expense-report",
+      },
+      {
+        title: "Income Report",
+        icon: BarChart3,
+        href: "/reports/income-report",
+      },
+      {
+        title: "Tax Report",
+        icon: BarChart3,
+        href: "/reports/tax-report",
+      },
+      {
+        title: "Profit & Loss",
+        icon: BarChart3,
+        href: "/reports/profit-loss",
+      },
+      {
+        title: "Annual Report",
+        icon: BarChart3,
+        href: "/reports/annual-report",
+      },
+    ],
+  },
+  {
     title: "Sales",
     icon: ShoppingCart,
     children: [
-      { title: "Sales", icon: ShoppingCart, href: "/dashboard/sales/sales" },
-      { title: "Invoices", icon: FileText, href: "/dashboard/sales/invoices" },
+      { title: "Sales", icon: ShoppingCart, href: "/sales/sales" },
+      { title: "Invoices", icon: FileText, href: "/sales/invoices" },
       {
         title: "Sales Return",
         icon: Quote,
@@ -238,21 +319,7 @@ const menuItems: MenuItem[] = [
       },
     ],
   },
-  {
-    title: "Peoples",
-    icon: Users,
-    children: [
-      { title: "Customers", icon: Users, href: "/peoples/customers" },
-      { title: "Billers", icon: Users2, href: "/peoples/billers" },
-      { title: "Suppliers", icon: UserPlus, href: "/peoples/suppliers" },
-      { title: "Stores", icon: Building2, href: "/peoples/stores" },
-      {
-        title: "Warehouses",
-        icon: Warehouse,
-        href: "/peoples/warehouses",
-      },
-    ],
-  },
+
   {
     title: "HRM",
     icon: Briefcase,
@@ -279,72 +346,7 @@ const menuItems: MenuItem[] = [
       { title: "Payroll", icon: DollarSign, href: "/hrm/payroll" },
     ],
   },
-  {
-    title: "Reports",
-    icon: BarChart3,
-    children: [
-      {
-        title: "Sales Report",
-        icon: BarChart3,
-        href: "/reports/sales-report",
-      },
-      {
-        title: "Purchase Report",
-        icon: BarChart3,
-        href: "/reports/purchase-report",
-      },
-      {
-        title: "Inventory Report",
-        icon: BarChart3,
-        href: "/reports/inventory-report",
-      },
-      {
-        title: "Invoice Report",
-        icon: BarChart3,
-        href: "/reports/invoice-report",
-      },
-      {
-        title: "Supplier Report",
-        icon: BarChart3,
-        href: "/reports/supplier-report",
-      },
-      {
-        title: "Customer Report",
-        icon: BarChart3,
-        href: "/reports/customer-report",
-      },
-      {
-        title: "Product Report",
-        icon: BarChart3,
-        href: "/reports/product-report",
-      },
-      {
-        title: "Expense Report",
-        icon: BarChart3,
-        href: "/reports/expense-report",
-      },
-      {
-        title: "Income Report",
-        icon: BarChart3,
-        href: "/reports/income-report",
-      },
-      {
-        title: "Tax Report",
-        icon: BarChart3,
-        href: "/reports/tax-report",
-      },
-      {
-        title: "Profit & Loss",
-        icon: BarChart3,
-        href: "/reports/profit-loss",
-      },
-      {
-        title: "Annual Report",
-        icon: BarChart3,
-        href: "/reports/annual-report",
-      },
-    ],
-  },
+
   {
     title: "User Management",
     icon: UserCog,

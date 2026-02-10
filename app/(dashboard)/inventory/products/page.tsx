@@ -34,43 +34,40 @@ const products = [
   {
     sku: "PT001",
     name: "Lenovo IdeaPad 3",
-    image: "/products/laptop.png",
+    image: "/images/lenovoIdeaPad.png",
     category: "Computers",
     brand: "Lenovo",
     price: "$600",
     unit: "Pc",
     qty: 100,
     createdBy: "James Kirwin",
-    avatar: "/users/user1.png",
   },
   {
     sku: "PT002",
     name: "Beats Pro",
-    image: "/products/headphone.png",
+    image: "/images/beatsPro.png",
     category: "Electronics",
     brand: "Beats",
     price: "$160",
     unit: "Pc",
     qty: 140,
     createdBy: "Francis Chang",
-    avatar: "/users/user2.png",
   },
   {
     sku: "PT003",
     name: "Nike Jordan",
-    image: "/products/shoe.png",
+    image: "/images/nikeJordan.png",
     category: "Shoe",
     brand: "Nike",
     price: "$110",
     unit: "Pc",
     qty: 300,
     createdBy: "Antonio Engle",
-    avatar: "/users/user3.png",
   },
   {
     sku: "PT004",
     name: "Apple Series 5 Watch",
-    image: "/products/watch.png",
+    image: "/images/appleSeries5.png",
     category: "Electronics",
     brand: "Apple",
     price: "$120",
@@ -82,7 +79,7 @@ const products = [
   {
     sku: "PT005",
     name: "Amazon Echo Dot",
-    image: "/products/echo.png",
+    image: "/images/amazonEchoDot.png",
     category: "Electronics",
     brand: "Amazon",
     price: "$80",
@@ -94,7 +91,7 @@ const products = [
   {
     sku: "PT001",
     name: "Lenovo IdeaPad 3",
-    image: "/products/laptop.png",
+    image: "/images/lenovoIdeaPad.png",
     category: "Computers",
     brand: "Lenovo",
     price: "$600",
@@ -106,7 +103,7 @@ const products = [
   {
     sku: "PT002",
     name: "Beats Pro",
-    image: "/products/headphone.png",
+    image: "/images/beatsPro.png",
     category: "Electronics",
     brand: "Beats",
     price: "$160",
@@ -118,7 +115,7 @@ const products = [
   {
     sku: "PT003",
     name: "Nike Jordan",
-    image: "/products/shoe.png",
+    image: "/images/nikeJordan.png",
     category: "Shoe",
     brand: "Nike",
     price: "$110",
@@ -130,7 +127,7 @@ const products = [
   {
     sku: "PT004",
     name: "Apple Series 5 Watch",
-    image: "/products/watch.png",
+    image: "/images/appleSeries5.png",
     category: "Electronics",
     brand: "Apple",
     price: "$120",
@@ -142,7 +139,7 @@ const products = [
   {
     sku: "PT005",
     name: "Amazon Echo Dot",
-    image: "/products/echo.png",
+    image: "/images/amazonEchoDot.png",
     category: "Electronics",
     brand: "Amazon",
     price: "$80",
@@ -154,7 +151,7 @@ const products = [
   {
     sku: "PT001",
     name: "Lenovo IdeaPad 3",
-    image: "/products/laptop.png",
+    image: "/images/lenovoIdeaPad.png",
     category: "Computers",
     brand: "Lenovo",
     price: "$600",
@@ -166,7 +163,7 @@ const products = [
   {
     sku: "PT002",
     name: "Beats Pro",
-    image: "/products/headphone.png",
+    image: "/images/beatsPro.png",
     category: "Electronics",
     brand: "Beats",
     price: "$160",
@@ -178,7 +175,7 @@ const products = [
   {
     sku: "PT003",
     name: "Nike Jordan",
-    image: "/products/shoe.png",
+    image: "/images/nikeJordan.png",
     category: "Shoe",
     brand: "Nike",
     price: "$110",
@@ -190,7 +187,7 @@ const products = [
   {
     sku: "PT004",
     name: "Apple Series 5 Watch",
-    image: "/products/watch.png",
+    image: "/images/appleSeries5.png",
     category: "Electronics",
     brand: "Apple",
     price: "$120",
@@ -202,7 +199,7 @@ const products = [
   {
     sku: "PT005",
     name: "Amazon Echo Dot",
-    image: "/products/echo.png",
+    image: "/images/amazonEchoDot.png",
     category: "Electronics",
     brand: "Amazon",
     price: "$80",
@@ -302,13 +299,15 @@ export default function ProductsPage() {
 
                   <TableCell>
                     <div className="flex items-center gap-3">
-                      <Image
-                        src={p.image}
-                        alt={p.name}
-                        width={36}
-                        height={36}
-                        className="rounded-md"
-                      />
+                      <div className="h-10 w-10 rounded-full bg-gray-100 flex items-center justify-center text-sm font-semibold">
+                        <Image
+                          src={p.image}
+                          alt={p.name}
+                          width={20}
+                          height={20}
+                          className="object-contain rounded-lg"
+                        />
+                      </div>
                       <span className="font-medium">{p.name}</span>
                     </div>
                   </TableCell>
