@@ -30,7 +30,14 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 
-export const brands = [
+type Brand = {
+  brand: string;
+  image: string;
+  createdDate: string;
+  status: "active" | "inactive";
+};
+
+export const brands: Brand[] = [
   {
     brand: "Apple",
     image: "/brands/apple.png",
@@ -69,9 +76,7 @@ export const brands = [
   },
 ];
 
-
-
-const statusStyles = {
+const statusStyles: Record<Brand["status"], string> = {
   active: "bg-green-700 text-white",
   inactive: "bg-red-600 text-white",
 };

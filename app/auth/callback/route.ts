@@ -49,7 +49,7 @@ export async function GET(request: Request) {
           status: 302, 
         });
       }
-    } catch (error: any) {
+    } catch (error) {
       console.error("Unexpected error:", error);
       return NextResponse.redirect(
         new URL(

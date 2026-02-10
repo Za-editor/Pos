@@ -76,7 +76,7 @@ export default function ForgotPasswordPage() {
             Forgot password?
           </h2>
           <p className="text-gray-500 mb-8 text-[16px] leading-relaxed">
-            If you forgot your password, well, then we'll email you instructions
+            If you forgot your password, well, then we`ll email you instructions
             to reset your password.
           </p>
 

@@ -83,7 +83,7 @@ const suppliers = [
 ];
 
 
-const statusStyles = {
+const statusStyles: Record<string, string> = {
   active: "bg-green-700 text-white",
   inactive: "bg-red-600 text-white",
 };

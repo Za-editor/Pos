@@ -190,7 +190,7 @@ export default function ProductsSubCategoryPage() {
                   <TableCell>{p.description}</TableCell>
                   <TableCell>
                     <span
-                      className={`px-2 py-1 rounded-full text-sm ${statusStyles[p.status]}`}
+                      className={`px-2 py-1 rounded-full text-sm ${statusStyles[p.status as keyof typeof statusStyles]}`}
                     >
                       • {p.status}
                     </span>
