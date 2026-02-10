@@ -1,6 +1,7 @@
 "use client";
 
 import Chart from "react-apexcharts";
+import { ApexOptions } from "apexcharts";
 
 const series = [
   {
@@ -82,10 +83,9 @@ const series = [
   },
 
 ];
-
-const options = {
+const options: ApexOptions = {
   chart: {
-    type: "heatmap",
+    type: "heatmap" as const,
     toolbar: { show: false },
   },
   dataLabels: { enabled: false },
@@ -110,7 +110,6 @@ const options = {
     },
   },
 };
-
 export function OrderHeatmapChart() {
   return (
     <Chart options={options} series={series} type="heatmap" height={400} />

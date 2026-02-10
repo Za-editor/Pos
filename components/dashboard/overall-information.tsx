@@ -1,5 +1,6 @@
 "use client";
 
+import type { ReactNode } from "react";
 import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 import { Info, Users, UserCheck, ShoppingCart, Calendar } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -98,8 +99,13 @@ export default function OverallInformationCard() {
     </Card>
   );
 }
+type StatBoxProps = {
+  icon: ReactNode;
+  label: string;
+  value: string | number;
+};
 
-function StatBox({ icon, label, value }: any) {
+function StatBox({ icon, label, value }: StatBoxProps) {
   return (
     <div className="border rounded-xl p-4 text-center space-y-2">
       <div className="flex justify-center">{icon}</div>
@@ -109,7 +115,15 @@ function StatBox({ icon, label, value }: any) {
   );
 }
 
-function Metric({ value, label, percent, color, bg }: any) {
+type MetricProps = {
+  value: string | number;
+  label: string;
+  percent: string;
+  color?: string;
+  bg?: string;
+};
+
+function Metric({ value, label, percent, color = "", bg = "" }: MetricProps) {
   return (
     <div className="space-y-2">
       <p className="text-2xl font-semibold">{value}</p>

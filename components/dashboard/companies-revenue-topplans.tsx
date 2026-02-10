@@ -14,7 +14,7 @@ import {
 } from "recharts";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Calendar, ShoppingCart } from "lucide-react";
+import { Calendar,  } from "lucide-react";
 
 /* ---------------- DATA ---------------- */
 

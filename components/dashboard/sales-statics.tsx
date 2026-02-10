@@ -65,7 +65,14 @@ export function SalesStaticsCard() {
   );
 }
 
-function SummaryBox({ title, value, trend, positive }: any) {
+type SummaryBoxProps = {
+  title: string;
+  value: string;
+  trend: string;
+  positive?: boolean;
+};
+
+function SummaryBox({ title, value, trend, positive = false }: SummaryBoxProps) {
   return (
     <div className="border rounded-xl p-4 min-w-45">
       <div className="flex items-center gap-2">
