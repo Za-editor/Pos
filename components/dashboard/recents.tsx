@@ -2,6 +2,7 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 
 
 
@@ -13,6 +14,7 @@ export const recentTransactions = [
     date: "14 Jan 2025",
     plan: "Basic",
     amount: "+$245",
+    img: "/images/stellarDynamics.png"
   },
   {
     company: "Quantum Nexus",
@@ -20,6 +22,7 @@ export const recentTransactions = [
     date: "10 Jan 2025",
     plan: "Enterprise",
     amount: "+$395",
+    img: "/images/quantumNexus.png"
   },
   {
     company: "Aurora Technologies",
@@ -27,6 +30,7 @@ export const recentTransactions = [
     date: "08 Jan 2025",
     plan: "Advanced",
     amount: "+$145",
+      img: "/images/auroraTechnologies.png"
   },
   {
     company: "TerraFusion Energy",
@@ -34,6 +38,7 @@ export const recentTransactions = [
     date: "06 Jan 2025",
     plan: "Enterprise",
     amount: "+$758",
+    img: "/images/terrafusionEnergies.png"
   },
   {
     company: "Epicurean Delights",
@@ -41,6 +46,7 @@ export const recentTransactions = [
     date: "03 Jan 2025",
     plan: "Premium",
     amount: "+$977",
+    img: "/images/epicureanDelights.png"
   },
 ];
 
@@ -49,26 +55,31 @@ export const recentlyRegistered = [
     name: "Pitch",
     plan: "Basic (Monthly)",
     users: 150,
+    img: "/images/pitch.png"
   },
   {
     name: "Initech",
     plan: "Enterprise (Yearly)",
     users: 200,
+    img: "/images/initech.png"
   },
   {
     name: "Umbrella Corp",
     plan: "Advanced (Monthly)",
     users: 108,
+    img: "/images/umbrellaCorp.png"
   },
   {
     name: "Capital Partners",
     plan: "Enterprise (Monthly)",
     users: 110,
+    img: "/images/capitalPartners.png"
   },
   {
     name: "Massive Dynamic",
     plan: "Premium (Yearly)",
     users: 120,
+    img: "/images/massiveDynamic.png"
   },
 ];
 
@@ -76,22 +87,27 @@ export const expiredPlans = [
   {
     name: "Silicon Corp",
     expiredOn: "10 Apr 2025",
+    img: "/images/siliconCorp.png"
   },
   {
     name: "Hubspot",
     expiredOn: "12 Jun 2025",
+    img: "/images/hubspot.png"
   },
   {
     name: "Licon Industries",
     expiredOn: "16 Jun 2025",
+    img: "/images/liconIndustries.png"
   },
   {
     name: "TerraFusion Energy",
     expiredOn: "12 May 2025",
+    img: "/images/terrafusionEnergies.png"
   },
   {
     name: "Epicurean Delights",
     expiredOn: "15 May 2025",
+    img: "/images/epicureanDelights.png"
   },
 ];
 
@@ -110,7 +126,13 @@ export function RecentTransactions() {
           <div key={i} className="flex items-center justify-between">
             <div className="flex gap-3">
               <div className="h-10 w-10 rounded-full bg-gray-100 flex items-center justify-center text-sm font-semibold">
-                {item.company[0]}
+                              <Image
+                                src={item.img}
+                                alt={item.company}
+                                width={20}
+                                height={20}
+                                className="object-contain rounded-lg"
+                              />
               </div>
               <div>
                 <p className="font-medium">{item.company}</p>
@@ -147,7 +169,13 @@ export function RecentlyRegisteredCard() {
           <div key={i} className="flex items-center justify-between">
             <div className="flex gap-3">
               <div className="h-10 w-10 rounded-full bg-gray-100 flex items-center justify-center font-semibold">
-                {item.name[0]}
+                <Image
+                  src={item.img}
+                  alt={item.name}
+                  width={20}
+                  height={20}
+                  className="object-contain rounded-lg"
+                />
               </div>
               <div>
                 <p className="font-medium">{item.name}</p>
@@ -177,7 +205,13 @@ export function RecentPlanExpiredCard() {
           <div key={i} className="flex items-center justify-between">
             <div className="flex gap-3">
               <div className="h-10 w-10 rounded-full bg-gray-100 flex items-center justify-center font-semibold">
-                {item.name[0]}
+                <Image
+                  src={item.img}
+                  alt={item.name}
+                  width={20}
+                  height={20}
+                  className="object-contain rounded-lg"
+                />
               </div>
               <div>
                 <p className="font-medium">{item.name}</p>
